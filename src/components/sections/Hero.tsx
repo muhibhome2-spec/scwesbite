@@ -22,32 +22,34 @@ const DONATION_AMOUNTS: DonationAmount[] = [
   { amount: 250, description: 'Full education sponsorship' },
 ];
 
-export function Hero() {
-  const [donationType, setDonationType] = useState<DonationType>('one-time');
-  const [selectedAmount, setSelectedAmount] = useState<number | null>(50);
-  const [customAmount, setCustomAmount] = useState('');
+import { useDonationForm } from '../../hooks/useDonationForm';
 
-  const handleCustomAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomAmount(e.target.value);
-    setSelectedAmount(null);
-  };
+export function Hero() {
+  const {
+    donationType,
+    setDonationType,
+    selectedAmount,
+    customAmount,
+    handleAmountSelect,
+    handleCustomAmountChange
+  } = useDonationForm({ defaultAmount: 50 });
 
   return (
     <section className="relative w-full min-h-[95vh] bg-gray-50 overflow-hidden flex flex-col justify-center">
-      
+
       {/* --- BACKGROUND LAYER --- */}
       <div className="absolute inset-0 z-0">
-        
+
         {/* 1. Reliable Image Source (Unsplash ID) */}
         <img
           src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2000&auto=format&fit=crop"
           alt="Charity Impact"
-          className="w-full h-full object-cover object-center opacity-100" 
+          className="w-full h-full object-cover object-center opacity-100"
         />
-        
+
         {/* 2. Premium Dot Pattern Overlay (Adds texture so it's never plain) */}
-        <div 
-          className="absolute inset-0 opacity-[0.15]" 
+        <div
+          className="absolute inset-0 opacity-[0.15]"
           style={{
             backgroundImage: 'radial-gradient(#264245 1px, transparent 1px)',
             backgroundSize: '24px 24px'
@@ -63,10 +65,10 @@ export function Hero() {
       {/* --- CONTENT LAYER --- */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-24 lg:pt-32 pb-20">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          
+
           {/* --- LEFT COLUMN: Typography --- */}
           <div className="lg:col-span-7 space-y-10">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -86,20 +88,20 @@ export function Hero() {
               </DisplayHeading>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="max-w-xl"
             >
               <BodyText className="font-sans text-xl leading-relaxed text-brand-primary-dark/90 font-medium">
-                Your contribution provides essential education, clean water, and healthcare. 
+                Your contribution provides essential education, clean water, and healthcare.
                 Join a community dedicated to lasting change.
               </BodyText>
             </motion.div>
 
             {/* Indicators */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
@@ -123,14 +125,14 @@ export function Hero() {
           </div>
 
           {/* --- RIGHT COLUMN: The Card --- */}
-          <motion.div 
+          <motion.div
             className="lg:col-span-5"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl shadow-teal-900/5 border border-white/60 p-6 sm:p-8 relative overflow-hidden">
-              
+
               <div className="mb-8 text-center space-y-1">
                 <h3 className="text-2xl font-geist font-bold text-brand-primary-darker tracking-tight">Make a Difference</h3>
                 <p className="text-brand-primary/80 text-sm font-sans">Choose an amount to donate</p>
@@ -161,11 +163,11 @@ export function Hero() {
                   return (
                     <button
                       key={item.amount}
-                      onClick={() => { setSelectedAmount(item.amount); setCustomAmount(''); }}
+                      onClick={() => handleAmountSelect(item.amount)}
                       className={`
                         relative py-4 px-4 rounded-xl border text-center transition-all duration-200
-                        ${isSelected 
-                          ? 'border-olive-500 bg-olive-50/50 text-brand-primary-dark ring-1 ring-olive-500/20' 
+                        ${isSelected
+                          ? 'border-olive-500 bg-olive-50/50 text-brand-primary-dark ring-1 ring-olive-500/20'
                           : 'border-brand-primary-light bg-white hover:border-olive-300 hover:bg-olive-50/30 text-brand-primary-dark'}
                       `}
                     >
@@ -183,18 +185,18 @@ export function Hero() {
               {/* Custom Input */}
               <div className="relative mb-6">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-primary font-geist font-bold text-lg">$</span>
-                <input 
+                <input
                   type="number"
                   placeholder="Other amount"
                   value={customAmount}
-                  onChange={handleCustomAmountChange}
+                  onChange={(e) => handleCustomAmountChange(e.target.value)}
                   className="w-full bg-white border border-brand-primary-light rounded-xl py-3.5 pl-8 pr-4 text-brand-primary-dark placeholder:text-brand-primary/70 focus:outline-none focus:border-olive-500 focus:ring-4 focus:ring-olive-500/10 transition-all font-geist font-medium"
                 />
               </div>
 
               {/* Impact Message */}
               <div className="min-h-[28px] mb-6">
-                 <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait">
                   {selectedAmount && !customAmount && (
                     <motion.div
                       key="impact"
@@ -204,7 +206,7 @@ export function Hero() {
                       className="flex justify-center"
                     >
                       <span className="text-xs font-bold text-olive-700 bg-olive-100/50 py-1.5 px-3 rounded-md border border-olive-200/50 font-geist">
-                         Your ${selectedAmount} provides: <span className="font-normal font-sans text-olive-800">{DONATION_AMOUNTS.find(d => d.amount === selectedAmount)?.description}</span>
+                        Your ${selectedAmount} provides: <span className="font-normal font-sans text-olive-800">{DONATION_AMOUNTS.find(d => d.amount === selectedAmount)?.description}</span>
                       </span>
                     </motion.div>
                   )}
@@ -219,9 +221,9 @@ export function Hero() {
               </button>
 
               <div className="mt-4 text-center">
-                 <p className="text-[10px] text-brand-primary/80 uppercase tracking-widest flex items-center justify-center gap-2 font-geist font-semibold">
-                    <Shield className="w-3 h-3" /> Secure Payment
-                 </p>
+                <p className="text-[10px] text-brand-primary/80 uppercase tracking-widest flex items-center justify-center gap-2 font-geist font-semibold">
+                  <Shield className="w-3 h-3" /> Secure Payment
+                </p>
               </div>
 
             </div>

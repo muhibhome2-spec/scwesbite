@@ -21,7 +21,7 @@ export default {
           200: '#b3ced1',
           300: '#8db6ba',
           400: '#669da3',
-          500: '#3e6d73',
+          500: '#3e6d73', // Use brand-primary
           600: '#32585c',
           700: '#264245',
           800: '#192d2e',
@@ -79,7 +79,7 @@ export default {
       maxWidth: {
         '65ch': '65ch',
         'display': '18ch',
-        'heading': '22ch', 
+        'heading': '22ch',
         'subheading': '26ch',
         'body': '65ch',
         '7xl': '80rem',

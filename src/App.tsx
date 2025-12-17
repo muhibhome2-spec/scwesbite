@@ -20,11 +20,12 @@ import { WaterWellAppeal } from './pages/WaterWellAppeal';
 import { OrphanCareAppeal } from './pages/OrphanCareAppeal';
 import { FoodReliefAppeal } from './pages/FoodReliefAppeal';
 import { AppealsIndex } from './pages/AppealsIndex';
+import { SoulCaravanFeature } from './pages/SoulCaravanFeature';
 import { Navigation } from './components/Navigation';
 
 function NoiseOverlay() {
   return (
-    <div 
+    <div
       className="fixed inset-0 pointer-events-none z-50 opacity-[0.03] hidden sm:block"
       style={{
         backgroundImage: `url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGklEQVQYV2M8c+YMAxYwiqIoiqIoiqIoOikAAEX8A/nGmjQkAAAAAElFTkSuQmCC")`,
@@ -59,15 +60,16 @@ function App() {
             <div className="min-h-screen bg-gray-50 font-sans">
               <NoiseOverlay />
               <Navigation />
-              
+
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/water-well" element={<WaterWellAppeal />} />
                 <Route path="/orphan-care" element={<OrphanCareAppeal />} />
                 <Route path="/food-relief" element={<FoodReliefAppeal />} />
                 <Route path="/appeals" element={<AppealsIndex />} />
+                <Route path="/soul-caravan" element={<SoulCaravanFeature />} />
               </Routes>
-              
+
               <Footer />
             </div>
           </SmoothScrolling>
