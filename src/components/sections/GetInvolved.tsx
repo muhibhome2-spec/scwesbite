@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { HandHeart, Share2, Mail, ArrowRight, Plane } from 'lucide-react';
 import { SectionHeading, BodyText, SubHeading } from '../ui/Typography';
 
