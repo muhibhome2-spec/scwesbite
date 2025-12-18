@@ -42,7 +42,7 @@ const appeals = [
   {
     title: 'Qurbani',
     description: 'Fulfill your Qurbani obligation and share fresh meat with families in need. Your sacrifice provides protein-rich meals during Eid al-Adha celebrations.',
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?q=80&w=800&auto=format&fit=crop',
     category: 'Seasonal Appeal',
     isZakatEligible: false,
     href: '#qurbani',
