@@ -165,7 +165,7 @@ export function Programs() {
 
         {/* Bottom CTA (Optional - Adds closure to the section) */}
         <div className="mt-16 text-center">
-          <a href="#appeals" className="inline-flex items-center gap-2 text-olive-600 font-bold hover:text-olive-700 transition-colors border-b-2 border-olive-200 hover:border-olive-600 pb-0.5">
+          <a href="/appeals" className="inline-flex items-center gap-2 text-olive-600 font-bold hover:text-olive-700 transition-colors border-b-2 border-olive-200 hover:border-olive-600 pb-0.5">
             View all active appeals <ArrowRight size={16} />
           </a>
         </div>
