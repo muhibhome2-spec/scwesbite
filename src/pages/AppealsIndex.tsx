@@ -6,7 +6,7 @@ const appeals = [
   {
     title: 'Build a Water Well',
     description: 'Construct a deep-water tube well to provide clean, safe drinking water for an entire village (up to 200 people) for 10+ years.',
-    image: 'https://images.unsplash.com/photo-1541919329513-35f7af297129?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?q=80&w=800&auto=format&fit=crop',
     category: 'Sadaqah Jariyah',
     isZakatEligible: true,
     href: '/water-well',
