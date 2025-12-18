@@ -95,9 +95,9 @@ export function Navigation() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 w-full z-[100] border-b transition-all duration-500 ease-in-out ${navBackgroundClass}`}
-        style={{ backgroundColor: '#3e6d73' }}
-      >
+  className="fixed top-0 left-0 right-0 w-full z-[100] border-b"
+  style={{ backgroundColor: '#3e6d73', transition: 'none' }}
+>
         <div className="max-w-7xl mx-auto px-5 md:px-8 xl:px-10">
           <div className="flex items-center justify-between">
 
