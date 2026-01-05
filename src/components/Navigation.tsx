@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, type Variants, MotionConfig } from 'framer-motion';
-import { Phone, Lock, ChevronDown, Heart } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { motion, MotionConfig } from 'framer-motion';
+import { Lock, Heart } from 'lucide-react';
 import { NAV_CONFIG } from '../config/navigationConfig';
 import { useOptimizedScroll } from '../hooks/useOptimizedScroll';
 import { StatusIndicator } from './ui/StatusIndicator';
+import { NavigationItem } from './NavigationItem';
+import { MobileMenu } from './MobileMenu';
 
 const ANIMATION_CONFIG = {
   SPRING: { type: "spring", stiffness: 300, damping: 30 },
@@ -73,11 +74,11 @@ export function Navigation() {
   const isScrolled = useOptimizedScroll({ threshold: 20 });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [currentHash, setCurrentHash] = useState('');
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   useEffect(() => {
     const handleHashChange = () => setCurrentHash(window.location.hash);
     handleHashChange();
+    // Optimization: Consider using a centralized router listener instead of hashchange if we switch to full routing
     window.addEventListener('hashchange', handleHashChange);
 
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'unset';
@@ -88,6 +89,7 @@ export function Navigation() {
     };
   }, [isMobileMenuOpen]);
 
+  // Design Token compliance: Use semantic naming or CSS variables if possible in future
   const navBackgroundClass = isScrolled
     ? 'shadow-lg py-3 lg:py-4'
     : 'py-4 lg:py-6';
@@ -108,80 +110,13 @@ export function Navigation() {
 
             {/* 2. Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-8 xl:gap-12" role="navigation">
-              {NAV_CONFIG.map((link) => {
-                const isActive = currentHash === link.href;
-                const hasDropdown = link.dropdownItems && link.dropdownItems.length > 0;
-
-                return (
-                  <div
-                    key={link.label}
-                    className="relative"
-                    onMouseEnter={() => hasDropdown && setHoveredItem(link.label)}
-                    onMouseLeave={() => setHoveredItem(null)}
-                  >
-                    {/* HYBRID NAVIGATION PATTERN: Parent is a Link */}
-                    <Link
-                      to={link.href.startsWith('#') ? '/' : link.href}
-                      onClick={(e) => {
-                        if (link.href.startsWith('#')) {
-                          e.preventDefault();
-                          const element = document.querySelector(link.href);
-                          if (element) {
-                            element.scrollIntoView({ behavior: 'smooth' });
-                          }
-                        }
-                        setHoveredItem(null);
-                      }}
-                      className="relative group py-2 flex items-center gap-1 focus:outline-none"
-                      aria-current={isActive ? 'page' : undefined}
-                    >
-                      <span className={`text-sm xl:text-base font-medium tracking-wide transition-colors duration-300 ${isActive ? 'text-white font-bold' : 'text-white hover:text-white/80'} drop-shadow-sm`}>
-                        {link.label}
-                      </span>
-
-                      {hasDropdown && (
-                        <ChevronDown className={`w-4 h-4 text-white transition-transform duration-300 ${hoveredItem === link.label ? 'rotate-180' : ''}`} />
-                      )}
-
-                      <span className={`absolute -bottom-1 left-0 w-full h-[2px] rounded-full bg-olive-400 origin-left transition-transform duration-300 ease-out ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} />
-                    </Link>
-
-                    {hasDropdown && (
-                      <AnimatePresence>
-                        {hoveredItem === link.label && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 10 }}
-                            transition={{ duration: 0.2 }}
-                            className="absolute top-full left-0 mt-2 min-w-[220px] bg-white rounded-xl shadow-xl border border-teal-900/10 overflow-hidden z-50"
-                          >
-                            {link.dropdownItems!.map((item) => (
-                              <Link
-                                key={item.label}
-                                to={item.href.startsWith('#') ? '/' : item.href}
-                                onClick={(e) => {
-                                  if (item.href.startsWith('#')) {
-                                    e.preventDefault();
-                                    const element = document.querySelector(item.href);
-                                    if (element) {
-                                      element.scrollIntoView({ behavior: 'smooth' });
-                                    }
-                                  }
-                                  setHoveredItem(null);
-                                }}
-                                className="block px-4 py-3 text-teal-900 hover:bg-teal-50 transition-colors text-sm font-medium border-b border-gray-50 last:border-0"
-                              >
-                                {item.label}
-                              </Link>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    )}
-                  </div>
-                );
-              })}
+              {NAV_CONFIG.map((link) => (
+                <NavigationItem
+                  key={link.label}
+                  link={link}
+                  isActive={currentHash === link.href}
+                />
+              ))}
             </nav>
 
             {/* 3. Actions (Desktop) */}
@@ -234,114 +169,8 @@ export function Navigation() {
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
         currentHash={currentHash}
+        navConfig={NAV_CONFIG}
       />
     </>
-  );
-}
-
-// --- MOBILE MENU COMPONENT ---
-const mobileMenuVariants: Variants = {
-  hidden: { opacity: 0, clipPath: "circle(0% at 100% 0)" },
-  visible: {
-    opacity: 1,
-    clipPath: "circle(150% at 100% 0)",
-    transition: { type: "spring", stiffness: 40, damping: 20, staggerChildren: 0.1 }
-  },
-  exit: {
-    opacity: 0,
-    clipPath: "circle(0% at 100% 0)",
-    transition: { type: "spring", stiffness: 40, damping: 20, staggerChildren: 0.05, staggerDirection: -1 }
-  }
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 }
-};
-
-function MobileMenu({ isOpen, onClose, currentHash }: { isOpen: boolean; onClose: () => void; currentHash: string }) {
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          variants={mobileMenuVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          // Fix: Uses brand-primary and handled stacking context
-          className="fixed inset-0 top-0 z-40 bg-brand-primary flex flex-col pt-24 px-6 pb-10 overflow-y-auto lg:hidden"
-        >
-          {/* Decorative background element */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-teal-600/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-
-          <nav className="flex flex-col space-y-2 relative z-10">
-            {NAV_CONFIG.map((link) => {
-              const isActive = currentHash === link.href;
-              const hasDropdown = link.dropdownItems && link.dropdownItems.length > 0;
-
-              return (
-                <div key={link.label} className="border-b border-white/10 last:border-0">
-                  <motion.a
-                    href={link.href}
-                    variants={itemVariants}
-                    onClick={onClose}
-                    className={`group flex items-center justify-between py-4 ${isActive ? 'text-white' : 'text-white'}`}
-                  >
-                    {/* TYPOGRAPHY REFACtor: Text-xl (Body scale) instead of huge display text for better density */}
-                    <span className={`text-xl font-medium tracking-tight ${isActive ? 'font-bold' : ''}`}>
-                      {link.label}
-                    </span>
-                    {/* {hasDropdown && <ChevronDown className="h-5 w-5 text-white/70" />} */}
-                  </motion.a>
-
-                  {/* Render simplistic mobile dropdown items inline for now */}
-                  {hasDropdown && (
-                    <div className="pl-4 pb-4 space-y-3">
-                      {link.dropdownItems!.map(sub => (
-                        <Link
-                          key={sub.label}
-                          to={sub.href}
-                          onClick={onClose}
-                          className="block text-brand-primary-light text-base hover:text-white"
-                        >
-                          {sub.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </nav>
-
-          <motion.div variants={itemVariants} className="mt-auto relative z-10 space-y-6 pt-12">
-            <div className="flex flex-col gap-4">
-              <a href="#login" className="flex items-center gap-3 text-white hover:text-white/90 text-sm font-bold uppercase tracking-widest">
-                <div className="p-2 bg-white/10 rounded-lg">
-                  <Lock className="h-4 w-4" />
-                </div>
-                Access Donor Portal
-              </a>
-
-              <div className="h-px w-full bg-white/10 my-2" />
-
-              <div className="flex items-center justify-between text-white text-sm">
-                <span>Reg No: 12345678</span>
-                <a href="tel:+123456789" className="flex items-center gap-2 hover:text-white/90 transition-colors">
-                  <Phone className="h-3 w-3" /> Contact Support
-                </a>
-              </div>
-            </div>
-
-            <button
-              onClick={onClose}
-              className="w-full bg-white text-brand-primary-dark text-lg font-bold py-4 rounded-xl shadow-xl active:scale-95 transition-transform flex justify-center items-center gap-2"
-            >
-              Donate Now
-            </button>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
   );
 }

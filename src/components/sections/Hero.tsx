@@ -1,10 +1,11 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Shield, Users, ArrowRight, Check } from 'lucide-react';
-import { useState } from 'react';
+import { Heart, Shield, Users, ArrowRight, Check, ChevronLeft, ChevronRight, Droplets, BookOpen, Utensils, Home, GraduationCap } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
 import { DisplayHeading, BodyText } from '../ui/Typography';
 import { StatusIndicator } from '../ui/StatusIndicator';
+import { useDonationForm } from '../../hooks/useDonationForm';
 
 // --- TYPES ---
 type DonationType = 'one-time' | 'monthly';
@@ -12,6 +13,17 @@ type DonationType = 'one-time' | 'monthly';
 interface DonationAmount {
   amount: number;
   description: string;
+}
+
+interface Campaign {
+  id: string;
+  slide_index: number;
+  headline: React.ReactNode;
+  description: string;
+  image: string;
+  icon: React.ElementType;
+  accent: string;
+  colorClass: string;
 }
 
 // --- CONSTANTS ---
@@ -22,9 +34,66 @@ const DONATION_AMOUNTS: DonationAmount[] = [
   { amount: 250, description: 'Full education sponsorship' },
 ];
 
-import { useDonationForm } from '../../hooks/useDonationForm';
+const CAMPAIGNS: Campaign[] = [
+  {
+    slide_index: 0,
+    id: "kenya_children_future",
+    headline: <>Help children in Kenya <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-olive-700 to-teal-700">build the future.</span></>,
+    description: "Every contribution goes toward providing children with the support they need to thrive, building the foundation for lasting change.",
+    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2000&auto=format&fit=crop",
+    icon: Users,
+    accent: "bg-teal-600",
+    colorClass: "from-teal-700 to-teal-900"
+  },
+  {
+    slide_index: 1,
+    id: "water_well_construction",
+    headline: <>Build a <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600">Water Well.</span></>,
+    description: "Together, we're giving communities access to clean water, improving daily lives and creating a healthier tomorrow.",
+    image: "https://images.unsplash.com/photo-1541919329513-35f7af297129?q=80&w=2000&auto=format&fit=crop",
+    icon: Droplets,
+    accent: "bg-cyan-600",
+    colorClass: "from-cyan-700 to-blue-900"
+  },
+  {
+    slide_index: 2,
+    id: "food_relief_program",
+    headline: <>Provide <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600">Food Relief.</span></>,
+    description: "Your support delivers nourishing food to vulnerable communities, turning hunger into hope.",
+    image: "https://images.unsplash.com/photo-1594708767771-a7502209ff51?q=80&w=2000&auto=format&fit=crop",
+    icon: Utensils,
+    accent: "bg-orange-600",
+    colorClass: "from-orange-700 to-amber-900"
+  },
+  {
+    slide_index: 3,
+    id: "orphan_care_support",
+    headline: <>Support <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-pink-600">Orphan Care.</span></>,
+    description: "Help provide vulnerable children with care, stability, and essential resources, creating an environment where they can flourish.",
+    image: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=2000&auto=format&fit=crop",
+    icon: Home,
+    accent: "bg-rose-600",
+    colorClass: "from-rose-700 to-pink-900"
+  },
+  {
+    slide_index: 4,
+    id: "education_investment",
+    headline: <>Invest in <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Education.</span></>,
+    description: "Provide learning opportunities to children who need it most, opening doors to a brighter future.",
+    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2000&auto=format&fit=crop",
+    icon: GraduationCap,
+    accent: "bg-indigo-600",
+    colorClass: "from-indigo-700 to-violet-900"
+  }
+];
+
+const AUTO_ADVANCE_INTERVAL = 7000; // 7 seconds
 
 export function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
   const {
     donationType,
     setDonationType,
@@ -34,79 +103,142 @@ export function Hero() {
     handleCustomAmountChange
   } = useDonationForm({ defaultAmount: 50 });
 
+  const nextSlide = useCallback(() => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % CAMPAIGNS.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setDirection(-1);
+    setCurrentSlide((prev) => (prev - 1 + CAMPAIGNS.length) % CAMPAIGNS.length);
+  }, []);
+
+  const goToSlide = (index: number) => {
+    setDirection(index > currentSlide ? 1 : -1);
+    setCurrentSlide(index);
+  };
+
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(nextSlide, AUTO_ADVANCE_INTERVAL);
+    return () => clearInterval(timer);
+  }, [isPaused, nextSlide]);
+
+  const activeCampaign = CAMPAIGNS[currentSlide];
+  const Icon = activeCampaign.icon;
+
   return (
-    <section className="relative w-full min-h-[95vh] bg-gray-50 overflow-hidden flex flex-col justify-center">
+    <section
+      className="relative w-full min-h-[100dvh] bg-gray-50 overflow-hidden flex flex-col justify-center"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
 
-      {/* --- BACKGROUND LAYER --- */}
-      <div className="absolute inset-0 z-0">
+      {/* --- CAROUSEL BACKGROUND --- */}
+      <AnimatePresence initial={false} custom={direction}>
+        <motion.div
+          key={currentSlide}
+          className="absolute inset-0 z-0"
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, zIndex: -1 }} // Ensure exiting slide is below
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <img
+            src={activeCampaign.image}
+            alt={activeCampaign.id}
+            className="w-full h-full object-cover object-center"
+          />
 
-        {/* 1. Reliable Image Source (Unsplash ID) */}
-        <img
-          src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2000&auto=format&fit=crop"
-          alt="Charity Impact"
-          className="w-full h-full object-cover object-center opacity-100"
-        />
+          {/* Overlay Textures */}
+          <div
+            className="absolute inset-0 opacity-[0.1]"
+            style={{
+              backgroundImage: 'radial-gradient(#000 1px, transparent 1px)',
+              backgroundSize: '24px 24px'
+            }}
+          />
 
-        {/* 2. Premium Dot Pattern Overlay (Adds texture so it's never plain) */}
-        <div
-          className="absolute inset-0 opacity-[0.15]"
-          style={{
-            backgroundImage: 'radial-gradient(#264245 1px, transparent 1px)',
-            backgroundSize: '24px 24px'
-          }}
-        />
-
-        {/* 3. Gradient Map: Adjusted for visibility */}
-        {/* Mobile: Heavier white fade from top so text is readable */}
-        {/* Desktop: Fade from left to right */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/80 to-white/40 sm:bg-gradient-to-r sm:from-[#f0f5f5] sm:via-[#f0f5f5]/90 sm:to-[#f0f5f5]/20" />
-      </div>
+          {/* Gradient Overlay for Legibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/20 sm:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-80 sm:hidden" />
+        </motion.div>
+      </AnimatePresence>
 
       {/* --- CONTENT LAYER --- */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-24 lg:pt-32 pb-20">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-24 lg:pt-0 pb-20 lg:pb-0 h-full">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center justify-center min-h-[80vh]">
 
-          {/* --- LEFT COLUMN: Typography --- */}
-          <div className="lg:col-span-7 space-y-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {/* Label */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary-light/80 text-brand-primary-dark text-[11px] font-geist font-bold tracking-widest uppercase mb-6 border border-brand-primary-light/50 backdrop-blur-md shadow-sm">
-                <StatusIndicator status="urgent" size="md" />
-                Urgent Appeal
+          {/* --- LEFT COLUMN: Slide Content --- */}
+          <div className="lg:col-span-7 space-y-10 relative">
+
+            {/* Animated Content Wrapper */}
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              >
+                {/* Campaign Label */}
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md border border-gray-200 text-gray-800 text-[11px] font-geist font-bold tracking-widest uppercase mb-6 shadow-sm">
+                  <Icon size={14} className={activeCampaign.accent.replace("bg-", "text-")} />
+                  <span>Campaign {currentSlide + 1} of {CAMPAIGNS.length}</span>
+                </div>
+
+                {/* HEADING */}
+                <DisplayHeading className="font-geist text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] text-brand-primary-darker tracking-tighter drop-shadow-sm min-h-[2.2em]">
+                  {activeCampaign.headline}
+                </DisplayHeading>
+
+                {/* Description */}
+                <div className="max-w-xl min-h-[5em]">
+                  <BodyText className="font-sans text-xl leading-relaxed text-brand-primary-dark/90 font-medium">
+                    {activeCampaign.description}
+                  </BodyText>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Navigation Controls */}
+            <div className="flex items-center gap-6 pt-8">
+              {/* Arrows */}
+              <div className="flex gap-2">
+                <button
+                  onClick={prevSlide}
+                  className="p-3 rounded-full bg-white/50 hover:bg-white border border-gray-200 text-brand-primary-dark transition-all hover:scale-110 active:scale-95 shadow-sm backdrop-blur-sm"
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="p-3 rounded-full bg-white/50 hover:bg-white border border-gray-200 text-brand-primary-dark transition-all hover:scale-110 active:scale-95 shadow-sm backdrop-blur-sm"
+                  aria-label="Next slide"
+                >
+                  <ChevronRight size={20} />
+                </button>
               </div>
 
-              {/* HEADING */}
-              <DisplayHeading className="font-geist text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] text-brand-primary-darker tracking-tighter drop-shadow-sm">
-                Help children in Kenya <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-olive-700 to-teal-700">
-                  build the future.
-                </span>
-              </DisplayHeading>
-            </motion.div>
+              {/* Dots */}
+              <div className="flex gap-3">
+                {CAMPAIGNS.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => goToSlide(idx)}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentSlide
+                        ? 'w-8 bg-brand-primary-dark'
+                        : 'w-2 bg-brand-primary-dark/20 hover:bg-brand-primary-dark/40'
+                      }`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-xl"
-            >
-              <BodyText className="font-sans text-xl leading-relaxed text-brand-primary-dark/90 font-medium">
-                Your contribution provides essential education, clean water, and healthcare.
-                Join a community dedicated to lasting change.
-              </BodyText>
-            </motion.div>
-
-            {/* Indicators */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="flex flex-wrap gap-8 pt-4 border-t border-teal-900/10"
-            >
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap gap-8 pt-8 border-t border-brand-primary-dark/5">
               <div className="flex items-center gap-3 group">
                 <Shield className="w-5 h-5 text-olive-600" />
                 <div className="text-sm font-geist">
@@ -121,21 +253,24 @@ export function Hero() {
                   <p className="text-brand-primary-dark/70 font-sans">Direct Impact</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
+
           </div>
 
-          {/* --- RIGHT COLUMN: The Card --- */}
-          <motion.div
-            className="lg:col-span-5"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl shadow-teal-900/5 border border-white/60 p-6 sm:p-8 relative overflow-hidden">
-
+          {/* --- RIGHT COLUMN: Persistent Donation Widget --- */}
+          <div className="lg:col-span-5 relative">
+            <motion.div
+              layout
+              className="bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl shadow-brand-primary-darker/10 border border-white/60 p-6 sm:p-8 relative overflow-hidden"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+            >
               <div className="mb-8 text-center space-y-1">
                 <h3 className="text-2xl font-geist font-bold text-brand-primary-darker tracking-tight">Make a Difference</h3>
-                <p className="text-brand-primary/80 text-sm font-sans">Choose an amount to donate</p>
+                <p className="text-brand-primary/80 text-sm font-sans flex items-center justify-center gap-1">
+                  Supporting <span className="font-bold text-brand-primary-dark">{activeCampaign.id.split('_').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ')}</span>
+                </p>
               </div>
 
               {/* Toggle */}
@@ -205,8 +340,9 @@ export function Hero() {
                       exit={{ opacity: 0 }}
                       className="flex justify-center"
                     >
-                      <span className="text-xs font-bold text-olive-700 bg-olive-100/50 py-1.5 px-3 rounded-md border border-olive-200/50 font-geist">
-                        Your ${selectedAmount} provides: <span className="font-normal font-sans text-olive-800">{DONATION_AMOUNTS.find(d => d.amount === selectedAmount)?.description}</span>
+                      <span className="text-xs font-bold text-olive-700 bg-olive-100/50 py-1.5 px-3 rounded-md border border-olive-200/50 font-geist text-center">
+                        <span className="block sm:inline">Your ${selectedAmount} provides: </span>
+                        <span className="font-normal font-sans text-olive-800">{DONATION_AMOUNTS.find(d => d.amount === selectedAmount)?.description}</span>
                       </span>
                     </motion.div>
                   )}
@@ -226,8 +362,8 @@ export function Hero() {
                 </p>
               </div>
 
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
         </div>
       </div>

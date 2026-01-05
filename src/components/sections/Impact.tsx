@@ -9,71 +9,63 @@ const EASE = [0.22, 1, 0.36, 1];
 
 const timelineData = [
   {
-    year: "2021",
+    year: "2020",
     status: "completed",
-    title: "The Seed is Planted",
-    description: "Witnessing the water crisis in rural Kenya firsthand, we registered the foundation. The first 3 months were spent listening to village elders.",
+    title: "The Seed Was Planted",
+    description: "Our founder visited Kenya’s Mombasa coast for work and witnessed firsthand the challenges faced by local communities. Inspired to make a difference, he envisioned creating opportunities for people to experience the beauty of Kenya while contributing through volunteer work.",
     photos: [
       'https://images.unsplash.com/photo-1541919329513-35f7af297129?q=80&w=800&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800&auto=format&fit=crop'
     ],
-    detailedCopy: "In 2021, our founder Uthman Hanif traveled to rural Kenya and witnessed the devastating impact of the water crisis. Families were walking miles daily to collect unsafe water. This experience sparked the creation of Soul Caravan Foundation, with a mission to provide sustainable, community-led solutions."
+    detailedCopy: "Our founder visited Kenya’s Mombasa coast for work and witnessed firsthand the challenges faced by local communities. Inspired to make a difference, he envisioned creating opportunities for people to experience the beauty of Kenya while contributing through volunteer work."
   },
   {
     year: "2022",
     status: "completed",
-    title: "First Well Commissioned",
-    description: "With support from our first 50 donors, we broke ground in Garissa. Seeing clean water flow for the first time changed everything.",
+    title: "The Journey Begins",
+    description: "Soul Caravan, a company dedicated to traveling with purpose, was born. The first group traveled to Kenya to experience its beauty while giving back, supporting three orphanages and establishing a school library in a local primary school.",
     photos: [
       'https://images.unsplash.com/photo-1541919329513-35f7af297129?q=80&w=800&auto=format&fit=crop'
     ],
-    detailedCopy: "Our first water well project in Garissa transformed a village of 150 people. With the support of 50 dedicated donors, we constructed a deep-water tube well that provided clean, safe drinking water for the entire community."
+    detailedCopy: "Soul Caravan, a company dedicated to traveling with purpose, was born. The first group traveled to Kenya to experience its beauty while giving back, supporting three orphanages and establishing a school library in a local primary school."
   },
   {
     year: "2023",
     status: "completed",
-    title: "Education Initiative",
-    description: "Expanded our focus to education. Partnered with 3 local madrasahs to provide uniforms and breakfast clubs, increasing attendance by 40%.",
+    title: "The Commitment Deepens",
+    description: "Through the funds raised from our second group trip, we strengthened our support for orphanages and the school library, continuing to stock books and resources. We refurbished an entire orphanage, providing mattresses, fans, school supplies, and many other essentials.",
     photos: [
       'https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=800&auto=format&fit=crop'
     ],
-    detailedCopy: "In 2023, we expanded beyond water to address education. We partnered with 3 local schools to provide uniforms, school supplies, and breakfast programs, resulting in a 40% increase in student attendance."
+    detailedCopy: "Through the funds raised from our second group trip, we strengthened our support for orphanages and the school library, continuing to stock books and resources. We refurbished an entire orphanage, providing mattresses, fans, school supplies, and many other essentials, ensuring the children had a safe and comfortable environment to live and learn."
   },
   {
     year: "2024",
     status: "completed",
-    title: "Scaling Operations",
-    description: "Formalized our '100% Donation Policy' and established a local Nairobi office to oversee projects directly, cutting third-party costs. Completed our most successful year with 12 new wells.",
+    title: "The Impact Expands",
+    description: "We continued our support for orphanages and took a major step in education by building a fully outfitted science lab in a soon-to-be-built secondary school within an under-resourced community, providing students with the tools to explore, learn, and grow.",
     photos: [
       'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800&auto=format&fit=crop'
     ],
-    detailedCopy: "2024 marked our most successful year. We formalized our 100% Donation Policy, ensuring every dollar goes directly to programs. We established a local office in Nairobi and completed 12 new water wells across Kenya."
+    detailedCopy: "We continued our support for orphanages and took a major step in education by building a fully outfitted science lab in a soon-to-be-built secondary school within an under-resourced community, providing students with the tools to explore, learn, and grow."
   },
   {
     year: "2025",
     status: "current",
-    title: "The 'Village 360' Pilot",
-    description: "Launching our holistic adoption model. Instead of one-off aid, we are adopting one village to provide water, food, and education simultaneously.",
+    title: "The Vision Becomes Clearer",
+    description: "Our latest group raised enough funds to renovate a Maasai village school and pledged to build secondary school classrooms. The overwhelming support and incredible enthusiasm inspired us to establish an official charity.",
     photos: [
       'https://images.unsplash.com/photo-1594708767771-a7502209ff51?q=80&w=800&auto=format&fit=crop'
     ],
-    detailedCopy: "In 2025, we're launching our most ambitious project yet: the Village 360 pilot program. Instead of single interventions, we're adopting one village to provide comprehensive support including water, food security, and education."
+    detailedCopy: "Our latest group raised enough funds to renovate a Maasai village school and pledged to build secondary school classrooms. The overwhelming support and incredible enthusiasm from those who experienced our work firsthand inspired us to take the next step: establishing an official charity to expand our impact."
   },
   {
-    year: "2026",
+    year: "2026 and beyond",
     status: "future",
-    title: "Regional Expansion",
-    description: "Goal: To expand our operations into neighboring Tanzania, replicating our community-led framework in regions with similar drought profiles.",
+    title: "The Mission Becomes a Movement",
+    description: "We formalized and officially launched the Soul Caravan Foundation. From building schools and water wells to providing food and supporting vulnerable communities, our mission is to create positive change and transform lives wherever we go.",
     photos: [],
-    detailedCopy: "Looking ahead to 2026, we plan to expand our operations into Tanzania, bringing our community-led development model to new regions facing similar challenges with water scarcity and poverty."
-  },
-  {
-    year: "2027",
-    status: "future",
-    title: "Self-Sustainability",
-    description: "Goal: To launch our first 'Waqf' (Endowment) farm, where agricultural profits will fund our admin costs permanently.",
-    photos: [],
-    detailedCopy: "By 2027, we aim to achieve administrative self-sustainability through our first Waqf farm initiative, where agricultural profits will permanently fund our operational costs."
+    detailedCopy: "We formalized and officially launched the Soul Caravan Foundation, setting forth a clear vision to make a lasting impact wherever it’s needed. From building schools and water wells to providing food and supporting vulnerable communities, our mission is to create positive change and transform lives wherever we go."
   }
 ];
 
