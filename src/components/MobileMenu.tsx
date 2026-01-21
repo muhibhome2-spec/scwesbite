@@ -2,6 +2,7 @@ import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Lock, Phone } from 'lucide-react';
 import type { NavigationLink } from '../types';
+import { Button } from './ui/button';
 
 interface MobileMenuProps {
     isOpen: boolean;
@@ -99,12 +100,12 @@ export function MobileMenu({ isOpen, onClose, currentHash, navConfig }: MobileMe
                             </div>
                         </div>
 
-                        <button
+                        <Button
                             onClick={onClose}
-                            className="w-full bg-white text-brand-primary-dark text-lg font-bold py-4 rounded-xl shadow-xl active:scale-95 transition-transform flex justify-center items-center gap-2"
+                            className="w-full bg-white text-brand-primary-dark text-lg font-bold py-4 rounded-xl shadow-xl active:scale-95 transition-transform flex justify-center items-center gap-2 hover:bg-gray-100 h-auto"
                         >
                             Donate Now
-                        </button>
+                        </Button>
                     </motion.div>
                 </motion.div>
             )}

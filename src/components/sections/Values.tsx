@@ -1,131 +1,96 @@
 'use client';
 
-import { motion, type Variants } from 'framer-motion';
-import { Heart, Globe, Users, ArrowRight } from 'lucide-react';
-import { Heading, Text, Button } from '../system';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import { Heading } from '../system';
+import { Button } from '@/components/ui/button';
 
 // --- TYPES ---
 interface ValueItem {
-  icon: typeof Heart;
   title: string;
   description: string;
   image: string;
 }
 
-const SPRING_CONFIG = { type: "spring", stiffness: 100, damping: 20 } as const;
-
 const values: ValueItem[] = [
   {
-    icon: Users,
     title: 'Community',
     description: 'We work directly with local communities, ensuring our programs are led by and designed for the people we serve.',
     image: 'https://ik.imagekit.io/dzmabcda0/finals/25-DSC00589.jpg'
   },
   {
-    icon: Heart,
     title: 'Empowerment',
     description: 'We provide communities with the tools, resources, and support they need to build sustainable solutions and take ownership of their own development.',
     image: 'https://ik.imagekit.io/dzmabcda0/finals/29-DSC00256.jpg'
   },
   {
-    icon: Globe,
     title: 'Transparency',
     description: 'We ensure the majority of your donation goes directly to our projects, with minimal administrative costs. Local staff are paid fairly to implement programs effectively on the ground',
     image: 'https://ik.imagekit.io/dzmabcda0/finals/13-DSC00025.jpg'
   }
 ];
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 }
-  }
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { type: "spring", stiffness: 120, damping: 24 }
-  }
-};
-
 export function Values() {
   return (
-    <section id="values" className="relative overflow-hidden bg-white py-24 lg:py-32 typography-enhanced">
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+    <section id="values" className="relative bg-white py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
-        {/* Header */}
-        <motion.div
-          className="mx-auto mb-20 max-w-2xl text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={SPRING_CONFIG}
-        >
-          <div className="flex justify-center mb-6">
-            <span className="section-badge bg-gray-50 text-gray-600 border-gray-200">
-              Our Ethos
-            </span>
+        {/* Editorial Header - Minimalist */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 lg:mb-24 gap-8">
+          <div className="max-w-2xl">
+            <span className="text-teal-600 font-bold uppercase tracking-widest text-xs mb-3 block">Our Ethos</span>
+            <Heading level={2} className="font-serif text-4xl lg:text-5xl text-gray-900">
+              Driven by <span className="italic text-teal-700">purpose.</span>
+            </Heading>
           </div>
+          <p className="text-gray-500 max-w-md text-sm leading-relaxed pb-2">
+            These principles are not just words—they are the architectural pillars of every program we design and every partnership we build.
+          </p>
+        </div>
 
-          <Heading level={2} className="mb-6">
-            Driven by <span className="italic font-serif text-teal-600">purpose.</span>
-          </Heading>
-
-          <Text size="base" color="muted" className="mx-auto">
-            These principles guide everything we do, from program design to community partnerships.
-          </Text>
-        </motion.div>
-
-        {/* Visual Storytelling Grid */}
-        <motion.div
-          className="grid gap-8 md:grid-cols-3"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {values.map((value) => (
+        {/* Editorial Grid - Stacked & Sharp */}
+        <div className="grid gap-x-8 gap-y-16 md:grid-cols-3">
+          {values.map((value, i) => (
             <motion.article
               key={value.title}
-              variants={cardVariants}
-              className="group relative flex flex-col h-full rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-500"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className="group flex flex-col"
             >
-              <div className="absolute inset-0">
+              {/* Image - Sharp, 4:3 Ratio, No Overlays */}
+              <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100 mb-8 relative">
                 <img
                   src={value.image}
                   alt={value.title}
-                  width={400}
-                  height={500}
                   loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/50 to-transparent p-8 flex flex-col justify-end" />
               </div>
 
-              <div className="relative z-10 p-8 pt-64 flex flex-col justify-end h-full text-white text-center">
-                <div className="mb-4 mx-auto inline-flex items-center justify-center p-3 rounded-xl bg-white/20 backdrop-blur-md text-white w-fit">
-                  <value.icon className="h-6 w-6" strokeWidth={1.5} aria-hidden="true" />
-                </div>
-
-                <h3 className="subheading text-white mb-3">
+              {/* Content - Clean, Serif Headings */}
+              <div className="flex flex-col gap-4">
+                <h3 className="text-2xl font-serif font-medium text-gray-900">
                   {value.title}
                 </h3>
 
-                <p className="text-white/90 leading-relaxed font-medium">
+                <div className="w-12 h-px bg-teal-200" />
+
+                <p className="text-gray-600 leading-relaxed text-[15px]">
                   {value.description}
                 </p>
               </div>
             </motion.article>
           ))}
-        </motion.div>
+        </div>
 
-        <div className="mt-16 text-center">
-          <Button variant="secondary" size="lg" href="/purpose" icon={<ArrowRight size={16} />}>
-            Read Our Full Purpose
+        {/* Footer Action - Standardized */}
+        <div className="mt-24 border-t border-gray-100 pt-12 flex justify-center">
+          <Button asChild variant="outline" className="rounded-full border-gray-300 text-gray-600 hover:text-teal-700 hover:border-teal-700 hover:bg-transparent px-8 py-6 uppercase tracking-widest text-xs font-bold transition-all">
+            <a href="/purpose">
+              Read Full Purpose <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
           </Button>
         </div>
       </div>

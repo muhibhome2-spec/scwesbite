@@ -17,9 +17,11 @@ import { Navigation } from './components/Navigation';
 const WaterWellAppeal = lazy(() => import('./pages/WaterWellAppeal').then(m => ({ default: m.WaterWellAppeal })));
 const OrphanCareAppeal = lazy(() => import('./pages/OrphanCareAppeal').then(m => ({ default: m.OrphanCareAppeal })));
 const FoodReliefAppeal = lazy(() => import('./pages/FoodReliefAppeal').then(m => ({ default: m.FoodReliefAppeal })));
-const AppealsIndex = lazy(() => import('./pages/AppealsIndex').then(m => ({ default: m.AppealsIndex })));
+// const AppealsIndex = lazy(() => import('./pages/AppealsIndex').then(m => ({ default: m.AppealsIndex })));
 const SoulCaravanFeature = lazy(() => import('./pages/SoulCaravanFeature').then(m => ({ default: m.SoulCaravanFeature })));
 const EducationAppeal = lazy(() => import('./pages/EducationAppeal').then(m => ({ default: m.EducationAppeal })));
+const MasjidAppeal = lazy(() => import('./pages/MasjidAppeal').then(m => ({ default: m.MasjidAppeal })));
+const QurbaniAppeal = lazy(() => import('./pages/QurbaniAppeal').then(m => ({ default: m.QurbaniAppeal })));
 const Purpose = lazy(() => import('./pages/Purpose').then(m => ({ default: m.Purpose })));
 const Leadership = lazy(() => import('./pages/Leadership').then(m => ({ default: m.Leadership })));
 const Fundraise = lazy(() => import('./pages/Fundraise').then(m => ({ default: m.Fundraise })));
@@ -68,8 +70,10 @@ function App() {
                   <Route path="/water-well" element={<WaterWellAppeal />} />
                   <Route path="/orphan-care" element={<OrphanCareAppeal />} />
                   <Route path="/food-relief" element={<FoodReliefAppeal />} />
-                  <Route path="/appeals" element={<AppealsIndex />} />
+                  {/* Deprecated: <Route path="/appeals" element={<AppealsIndex />} /> */}
                   <Route path="/education" element={<EducationAppeal />} />
+                  <Route path="/masjid" element={<MasjidAppeal />} />
+                  <Route path="/qurbani" element={<QurbaniAppeal />} />
                   <Route path="/purpose" element={<Purpose />} />
                   <Route path="/leadership" element={<Leadership />} />
                   <Route path="/fundraise" element={<Fundraise />} />

@@ -8,6 +8,7 @@ import { useOptimizedScroll } from '../hooks/useOptimizedScroll';
 import { MobileMenu } from './MobileMenu';
 import { NavigationItem } from './NavigationItem';
 import { HamburgerToggle } from './navigation/HamburgerToggle';
+import { Button } from './ui/button';
 
 // --- MAIN NAVIGATION ---
 export function Navigation() {
@@ -68,9 +69,9 @@ export function Navigation() {
               </Link>
 
               {/* User Icon */}
-              <button className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400">
-                <User className="w-5 h-5 text-white" />
-              </button>
+              <Button size="icon" variant="ghost" className="rounded-full bg-white/10 hover:bg-white/20 text-white hover:text-white transition-colors">
+                <User className="w-5 h-5" />
+              </Button>
             </div>
 
             {/* MOBILE ACTIONS */}

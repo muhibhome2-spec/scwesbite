@@ -4,6 +4,7 @@ import {
   Mail, Phone, MapPin, Heart, Facebook, Twitter, Instagram,
   ArrowUp
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -142,15 +143,16 @@ export function Footer() {
             ))}
           </div>
 
-          <button
+          <Button
             onClick={scrollToTop}
-            className="group flex items-center gap-2 text-xs text-teal-300/60 hover:text-white transition-colors uppercase tracking-wider font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500 rounded-sm"
+            variant="ghost"
+            className="group flex items-center gap-2 text-xs text-teal-300/60 hover:text-white hover:bg-transparent transition-colors uppercase tracking-wider font-medium p-0"
           >
             Back to Top
-            <span className="p-1.5 rounded-full bg-teal-800 group-hover:bg-olive-500 transition-colors">
+            <span className="p-1.5 rounded-full bg-teal-800 group-hover:bg-olive-500 transition-colors ml-2">
               <ArrowUp className="h-3 w-3" />
             </span>
-          </button>
+          </Button>
         </div>
       </div>
     </footer>

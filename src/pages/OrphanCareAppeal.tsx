@@ -1,176 +1,120 @@
-import { motion } from 'framer-motion';
-import { HeartHandshake, Heart, Shield, GraduationCap, ArrowLeft } from 'lucide-react';
-import { NarrativeImage } from '../components/ui/NarrativeImage';
 import { ORPHAN_CARE_IMAGES, IMAGES } from '../data/imageAssets';
-import { SectionHeading, BodyText, DisplayHeading } from '../components/ui/Typography';
+
+// Appeal Template Components
+import { AppealHero } from '@/components/templates/appeal/AppealHero';
+import { AppealProblem } from '@/components/templates/appeal/AppealProblem';
+import { AppealImpact } from '@/components/templates/appeal/AppealImpact';
+import { AppealCinematicStory } from '@/components/templates/appeal/AppealCinematicStory';
+import { AppealQuote } from '@/components/templates/appeal/AppealQuote';
+import { AppealFAQ } from '@/components/templates/appeal/AppealFAQ';
+import { AppealCTA } from '@/components/templates/appeal/AppealCTA';
 
 const SQUARE_LINK = 'https://square.link/u/1muC8Kjs';
 
+// Data
+const GALLERY_IMAGES = [
+  { src: ORPHAN_CARE_IMAGES[0], alt: 'Happy children' },
+  { src: ORPHAN_CARE_IMAGES[1], alt: 'Child receiving meal' },
+  { src: ORPHAN_CARE_IMAGES[2], alt: 'Children in classroom' },
+  { src: ORPHAN_CARE_IMAGES[3], alt: 'Community support' },
+];
+
+const FAQ_ITEMS = [
+  { question: 'Is my donation Zakat eligible?', answer: 'Yes, our Orphan & Widow Care program is fully Zakat eligible. We ensure your donation reaches the most vulnerable families.' },
+  { question: 'What does the support cover?', answer: 'Your donation covers essential needs including school fees, uniforms, daily nutritious meals, and healthcare, as well as psychosocial support.' },
+  { question: 'Can I sponsor a specific child?', answer: 'We pool donations to ensure all registered orphans in our rigorous program receive equal care and support, regardless of individual sponsorship status.' },
+  { question: 'How often will I receive updates?', answer: 'We provide annual reports and regular newsletter updates on the progress of the children and families in our care.' },
+];
+
 export function OrphanCareAppeal() {
   return (
-    <div className="min-h-screen bg-white pt-20 lg:pt-24">
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-rose-50 py-16 lg:py-24">
-        <div className="absolute inset-0">
-          <img
-            src={IMAGES.EDUCATION.BOY_SMILING}
-            alt="Child smiling"
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/30" />
-        </div>
+    <div className="min-h-screen bg-slate-50">
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="flex flex-col"
-            >
-              <a
-                href="/"
-                className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-rose-700 mb-6 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-700 rounded-sm"
-              >
-                <ArrowLeft size={16} />
-                Back to Home
-              </a>
+      {/* Hero */}
+      <AppealHero
+        title="Support Orphans & Widows"
+        subtitle="Provide comprehensive support including school fees, uniforms, food, and psychosocial support for families who have lost their primary provider. Your monthly support creates stability and hope."
+        badge="Orphan & Widow Care"
+        image={IMAGES.EDUCATION.BOY_SMILING}
+        ctaLink={SQUARE_LINK}
+      />
 
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-rose-200 bg-rose-100 px-3 py-1 text-xs font-bold uppercase tracking-widest text-rose-700 w-fit">
-                <HeartHandshake size={12} />
-                Orphan & Widow Care
-              </div>
+      {/* Problem */}
+      <AppealProblem
+        label="Nourishment for Growing Minds"
+        title="Every Child Deserves to Thrive"
+        intro={
+          <>
+            <p>
+              Every child deserves nutritious meals that fuel their growth and learning. Our orphan support program ensures no child goes hungry.
+            </p>
+            <p>
+              From daily meals to special treats, we provide the sustenance they need to thrive. Without this support, many children are forced to work instead of attending school.
+            </p>
+          </>
+        }
+        bullets={[
+          "Monthly support ensures stability",
+          "Education, food & healthcare included",
+          "Psychosocial support for trauma recovery"
+        ]}
+        image={{
+          src: ORPHAN_CARE_IMAGES[1],
+          alt: "Child receiving meal"
+        }}
+      />
 
-              <DisplayHeading theme="rose" align="left" className="mb-6 font-semibold">
-                Support Orphans & Widows
-              </DisplayHeading>
+      {/* Impact */}
+      <AppealImpact
+        title="Education Opens Doors"
+        subtitle="We cover school fees, uniforms, and supplies so orphaned children can continue their education. Knowledge is their pathway to independence."
+        images={GALLERY_IMAGES}
+      />
 
-              <BodyText size="lg" className="mb-8 leading-relaxed">
-                Provide comprehensive support including school fees, uniforms, food, and psychosocial support for families who have lost their primary provider. Your monthly support creates stability and hope.
-              </BodyText>
+      {/* Cinematic Story (Using Community Content) */}
+      <AppealCinematicStory
+        background={ORPHAN_CARE_IMAGES[2]} // Classroom bg
+        personName="A Community of Care"
+        personImage={ORPHAN_CARE_IMAGES[3]} // Community image
+        personImageAlt="Community gathering"
+        story={
+          <>
+            <p>
+              Beyond material support, we provide a network of care. Widows receive vocational training while their children receive mentorship and guidance.
+            </p>
+            <p>
+              Together, we build resilient families who can support themselves and give back to their communities. Many of our supported children go on to become teachers, doctors, and community leaders.
+            </p>
+          </>
+        }
+        quote="Your support provides complete care for orphaned children — education, nutrition, healthcare, and love."
+      />
 
-              <div className="flex flex-col gap-3 border-l-2 border-rose-200 pl-6 text-sm font-medium text-gray-500 mb-8">
-                <div className="flex items-center gap-3">
-                  <Shield className="h-5 w-5 text-rose-600" />
-                  <span>Monthly support available</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <GraduationCap className="h-5 w-5 text-rose-600" />
-                  <span>Education, food & healthcare included</span>
-                </div>
-              </div>
+      {/* Quote */}
+      <AppealQuote
+        image={ORPHAN_CARE_IMAGES[0]}
+        imageAlt="Happy child"
+        quote={
+          <>
+            <span className="text-emerald-600">"We don't just feed children;</span> we nourish their dreams. Seeing them graduate and succeed is the greatest reward."
+          </>
+        }
+        author="Program Coordinator"
+        role="Orphan Care Team"
+      />
 
-              <a
-                href={SQUARE_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-rose-600 px-8 py-4 text-base font-bold text-white shadow-lg hover:bg-rose-700 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
-              >
-                <Heart className="h-5 w-5 fill-white" />
-                Donate Now
-              </a>
-            </motion.div>
+      {/* FAQ */}
+      <AppealFAQ
+        items={FAQ_ITEMS}
+      />
 
-            <div className="hidden lg:block" />
-          </div>
-        </div>
-      </section>
+      {/* CTA */}
+      <AppealCTA
+        title="Be a Guardian of Hope"
+        text="Your monthly support creates stability and hope for families who have lost everything."
+        ctaLink={SQUARE_LINK}
+      />
 
-      {/* NARRATIVE IMAGE SECTION 1 */}
-      <section className="py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <NarrativeImage
-              src={ORPHAN_CARE_IMAGES[1]}
-              alt="Child receiving meal"
-              variant="feature"
-            />
-            <div>
-              <SectionHeading theme="rose" className="mb-4">
-                Nourishment for Growing Minds
-              </SectionHeading>
-              <BodyText size="lg" className="mb-4">
-                Every child deserves nutritious meals that fuel their growth and learning. Our orphan support program ensures no child goes hungry.
-              </BodyText>
-              <BodyText size="lg">
-                From daily meals to special treats, we provide the sustenance they need to thrive.
-              </BodyText>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NARRATIVE IMAGE SECTION 2 */}
-      <section className="py-16 lg:py-24 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1">
-              <SectionHeading theme="rose" className="mb-4">
-                Education Opens Doors
-              </SectionHeading>
-              <BodyText size="lg" className="mb-4">
-                We cover school fees, uniforms, and supplies so orphaned children can continue their education. Knowledge is their pathway to independence.
-              </BodyText>
-              <BodyText size="lg">
-                Many of our supported children go on to become teachers, doctors, and community leaders.
-              </BodyText>
-            </div>
-            <div className="order-1 lg:order-2">
-              <NarrativeImage
-                src={ORPHAN_CARE_IMAGES[2]}
-                alt="Children in classroom"
-                variant="feature"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NARRATIVE IMAGE SECTION 3 */}
-      <section className="py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <NarrativeImage
-              src={ORPHAN_CARE_IMAGES[3]}
-              alt="Community support"
-              variant="feature"
-            />
-            <div>
-              <SectionHeading theme="rose" className="mb-4">
-                A Community of Care
-              </SectionHeading>
-              <BodyText size="lg" className="mb-4">
-                Beyond material support, we provide a network of care. Widows receive vocational training while their children receive mentorship and guidance.
-              </BodyText>
-              <BodyText size="lg">
-                Together, we build resilient families who can support themselves and give back to their communities.
-              </BodyText>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section className="py-16 lg:py-24 bg-rose-800 text-white">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <HeartHandshake className="w-12 h-12 mx-auto mb-6 opacity-80" />
-          <SectionHeading color="inverse" className="mb-4">
-            Be a Guardian of Hope
-          </SectionHeading>
-          <BodyText color="inverse" size="lg" align="center" className="mb-8 opacity-90 max-w-2xl mx-auto">
-            Your support provides complete care for orphaned children — education, nutrition, healthcare, and love.
-          </BodyText>
-          <a
-            href={SQUARE_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-white text-rose-800 px-8 py-4 text-base font-bold shadow-lg transition-colors hover:bg-rose-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            <Heart className="h-5 w-5" />
-            Donate Now
-          </a>
-        </div>
-      </section>
     </div>
   );
 }

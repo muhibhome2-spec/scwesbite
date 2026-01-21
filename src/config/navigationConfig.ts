@@ -19,13 +19,13 @@ export const NAV_CONFIG: NavigationLink[] = [
         label: 'Our Appeals', // Renamed from Our Work
         href: '/#appeals',
         dropdownItems: [
-            { label: 'Build a Masjid', href: '/#appeals' },
+            { label: 'Build a Masjid', href: '/masjid' },
             { label: 'Build a Water Well', href: '/water-well' },
             { label: 'Orphan Care', href: '/orphan-care' },
             { label: 'Food Relief', href: '/food-relief' },
-            { label: 'Qurbani', href: '/#appeals' },
-            { label: 'Zakat', href: '/#appeals' },
-            { label: 'View All Appeals', href: '/appeals' } // Explicit View All
+            { label: 'Qurbani', href: '/qurbani' },
+            { label: 'Zakat', href: '/#programs' },
+            { label: 'View All Appeals', href: '/#programs' } // Explicit View All
         ]
     },
     {

@@ -1,180 +1,120 @@
-import { motion } from 'framer-motion';
-import { Utensils, Shield, Clock, ArrowLeft, Heart } from 'lucide-react';
-import { NarrativeImage } from '../components/ui/NarrativeImage';
 import { FOOD_RELIEF_IMAGES, IMAGES } from '../data/imageAssets';
-import { DisplayHeading, SectionHeading, BodyText } from '../components/ui/Typography';
+
+// Appeal Template Components
+import { AppealHero } from '@/components/templates/appeal/AppealHero';
+import { AppealProblem } from '@/components/templates/appeal/AppealProblem';
+import { AppealImpact } from '@/components/templates/appeal/AppealImpact';
+import { AppealCinematicStory } from '@/components/templates/appeal/AppealCinematicStory';
+import { AppealQuote } from '@/components/templates/appeal/AppealQuote';
+import { AppealFAQ } from '@/components/templates/appeal/AppealFAQ';
+import { AppealCTA } from '@/components/templates/appeal/AppealCTA';
 
 const SQUARE_LINK = 'https://square.link/u/dpkEeY0Q';
 
+// Data
+const GALLERY_IMAGES = [
+  { src: FOOD_RELIEF_IMAGES[0], alt: 'Food distribution' },
+  { src: FOOD_RELIEF_IMAGES[1], alt: 'Child receiving meal' },
+  { src: FOOD_RELIEF_IMAGES[2], alt: 'Food parcels' },
+  { src: FOOD_RELIEF_IMAGES[3], alt: 'Community meal' },
+];
+
+const FAQ_ITEMS = [
+  { question: 'Is my donation Zakat eligible?', answer: 'Yes, our Food Relief programs are designed to be Zakat eligible, reaching the poor and needy directly.' },
+  { question: 'What is included in a food parcel?', answer: 'Each parcel typically contains essentials like rice, flour, cooking oil, lentils, sugar, and tea — enough to feed a family for several weeks.' },
+  { question: 'Where does the food go?', answer: 'We distribute in areas facing critical food insecurity, including drought-affected regions and remote villages in Kenya.' },
+  { question: 'Do you provide cooked meals too?', answer: 'Yes, we run hot meal programs in schools and community centers to provide immediate relief alongside our dry ration distributions.' },
+];
+
 export function FoodReliefAppeal() {
   return (
-    <div className="min-h-screen bg-white pt-20 lg:pt-24">
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-orange-50 py-16 lg:py-24">
-        <div className="absolute inset-0">
-          <img
-            src={IMAGES.HOT_MEALS.GIRL_PLATE}
-            alt="Girl with hot meal"
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/30" />
-        </div>
+    <div className="min-h-screen bg-slate-50">
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="flex flex-col"
-            >
-              <a
-                href="/"
-                className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-orange-700 mb-6 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-700 rounded-sm"
-              >
-                <ArrowLeft size={16} />
-                Back to Home
-              </a>
+      {/* Hero */}
+      <AppealHero
+        title="Emergency Food Relief"
+        subtitle="Distribute hot, nutritious meals and monthly food parcels to families facing starvation due to poverty or conflict. When hunger strikes, immediate action saves lives."
+        badge="Emergency Relief"
+        image={IMAGES.HOT_MEALS.GIRL_PLATE}
+        ctaLink={SQUARE_LINK}
+      />
 
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-100 px-3 py-1 text-xs font-bold uppercase tracking-widest text-orange-700 w-fit">
-                <Clock size={12} />
-                Emergency Relief
-              </div>
+      {/* Problem */}
+      <AppealProblem
+        label="Hot Meals That Nourish"
+        title="No One Should Go Hungry"
+        intro={
+          <>
+            <p>
+              Our hot meal programs provide freshly cooked, nutritious food to those who need it most. From community halls to school feeding programs, we reach the hungry where they are.
+            </p>
+            <p>
+              Every meal includes rice, protein, and vegetables — a complete, balanced diet essential for health and development.
+            </p>
+          </>
+        }
+        bullets={[
+          "Emergency aid distribution within 24 hours",
+          "Immediate relief for families in crisis",
+          "Nutritionally balanced meals for children"
+        ]}
+        image={{
+          src: FOOD_RELIEF_IMAGES[1],
+          alt: "Child eating nutritious meal"
+        }}
+      />
 
-              <DisplayHeading theme="amber" align="left" className="mb-6 font-semibold">
-                Emergency Food Relief
-              </DisplayHeading>
+      {/* Impact */}
+      <AppealImpact
+        title="Food Parcels for Families"
+        subtitle="Beyond daily meals, we distribute monthly food parcels containing essentials. Each parcel feeds a family for weeks, providing stability."
+        images={GALLERY_IMAGES}
+      />
 
-              <BodyText size="lg" className="mb-8 leading-relaxed">
-                Distribute hot, nutritious meals and monthly food parcels to families facing starvation due to poverty or conflict. When hunger strikes, immediate action saves lives.
-              </BodyText>
+      {/* Cinematic Story */}
+      <AppealCinematicStory
+        background={FOOD_RELIEF_IMAGES[3]}
+        personName="Building Resilience"
+        personImage={FOOD_RELIEF_IMAGES[2]}
+        personImageAlt="Woman with food parcel"
+        story={
+          <>
+            <p>
+              We set up distribution points in villages and community centers, ensuring that aid reaches even the most remote areas. Local volunteers help identify families in need.
+            </p>
+            <p>
+              These provisions ensure that families have the stability of knowing where their next meal will come from, allowing them to focus on work and education instead of survival.
+            </p>
+          </>
+        }
+        quote="Your donation doesn't just provide food — it builds community resilience."
+      />
 
-              <div className="flex flex-col gap-3 border-l-2 border-orange-200 pl-6 text-sm font-medium text-gray-500 mb-8">
-                <div className="flex items-center gap-3">
-                  <Shield className="h-5 w-5 text-orange-600" />
-                  <span>Emergency aid distribution</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Clock className="h-5 w-5 text-orange-600" />
-                  <span>Immediate distribution to families in need</span>
-                </div>
-              </div>
+      {/* Quote */}
+      <AppealQuote
+        image={FOOD_RELIEF_IMAGES[0]}
+        imageAlt="Team distributing food"
+        quote={
+          <>
+            <span className="text-emerald-600">"Serving food is serving humanity."</span> Seeing a child finish a full plate of food with a smile is why we do this. It's basic dignity.
+          </>
+        }
+        author="Food Program Lead"
+        role="Emergency Response Team"
+      />
 
-              <a
-                href={SQUARE_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-8 py-4 text-base font-bold text-white shadow-lg hover:bg-orange-700 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
-              >
-                <Heart className="h-5 w-5 fill-white" />
-                Donate Now
-              </a>
-            </motion.div>
+      {/* FAQ */}
+      <AppealFAQ
+        items={FAQ_ITEMS}
+      />
 
-            <div className="hidden lg:block" />
-          </div>
-        </div>
-      </section>
+      {/* CTA */}
+      <AppealCTA
+        title="Feed a Family Today"
+        text="Your donation provides nutritious food packs that sustain vulnerable families for an entire month."
+        ctaLink={SQUARE_LINK}
+      />
 
-      {/* NARRATIVE IMAGE SECTION 1 */}
-      <section className="py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <NarrativeImage
-              src={FOOD_RELIEF_IMAGES[1]}
-              alt="Child eating nutritious meal"
-              variant="feature"
-            />
-            <div>
-              <div>
-                <SectionHeading theme="amber" className="mb-4">
-                  Hot Meals That Nourish
-                </SectionHeading>
-                <BodyText size="lg" className="mb-4">
-                  Our hot meal programs provide freshly cooked, nutritious food to those who need it most. From community halls to school feeding programs, we reach the hungry where they are.
-                </BodyText>
-                <BodyText size="lg">
-                  Every meal includes rice, protein, and vegetables — a complete, balanced diet.
-                </BodyText>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NARRATIVE IMAGE SECTION 2 */}
-      <section className="py-16 lg:py-24 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1">
-              <SectionHeading theme="amber" className="mb-4">
-                Food Parcels for Families
-              </SectionHeading>
-              <BodyText size="lg" className="mb-4">
-                Beyond daily meals, we distribute monthly food parcels containing rice, flour, cooking oil, lentils, and other essentials. Each parcel feeds a family for weeks.
-              </BodyText>
-              <BodyText size="lg">
-                These provisions ensure that families have the stability of knowing where their next meal will come from.
-              </BodyText>
-            </div>
-            <div className="order-1 lg:order-2">
-              <NarrativeImage
-                src={FOOD_RELIEF_IMAGES[2]}
-                alt="Woman carrying food parcel"
-                variant="feature"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NARRATIVE IMAGE SECTION 3 */}
-      <section className="py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <NarrativeImage
-              src={FOOD_RELIEF_IMAGES[3]}
-              alt="Food distribution setup"
-              variant="feature"
-            />
-            <div>
-              <div>
-                <SectionHeading theme="amber" className="mb-4">
-                  Community Distribution
-                </SectionHeading>
-                <BodyText size="lg" className="mb-4">
-                  We set up distribution points in villages and community centers, ensuring that aid reaches even the most remote areas. Local volunteers help identify families in need.
-                </BodyText>
-                <BodyText size="lg">
-                  Your donation doesn't just provide food — it builds community resilience.
-                </BodyText>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section className="py-16 lg:py-24 bg-orange-800 text-white">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <Utensils className="w-12 h-12 mx-auto mb-6 opacity-80" />
-          <SectionHeading color="inverse" className="mb-4">
-            No One Should Go Hungry
-          </SectionHeading>
-          <BodyText color="inverse" size="lg" align="center" className="mb-8 opacity-90 max-w-2xl mx-auto">
-            Your generosity feeds hope and provides essential nutrition to families in need.
-          </BodyText>
-          <a
-            href={SQUARE_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-white text-orange-800 px-8 py-4 text-base font-bold shadow-lg transition-colors hover:bg-orange-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            <Heart className="h-5 w-5" />
-            Donate Now
-          </a>
-        </div>
-      </section>
     </div>
   );
 }

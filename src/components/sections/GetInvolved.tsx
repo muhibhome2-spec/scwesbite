@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { HandHeart, Share2, Mail, ArrowRight, Plane } from 'lucide-react';
 import { Heading, Text } from '../system';
+import { Button } from '../ui/button';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -33,8 +34,6 @@ const ways = [
     href: '/soul-caravan'
   }
 ];
-
-
 
 export function GetInvolved() {
   return (
@@ -89,11 +88,12 @@ export function GetInvolved() {
               </p>
 
               <div className="mt-auto flex justify-center">
-                <button className="group/btn flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:text-teal-200">
-                  <Link to={way.href} className="absolute inset-0 z-10 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500" aria-hidden="true" />
-                  {way.action}
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" aria-hidden="true" />
-                </button>
+                <Button asChild variant="link" className="group/btn text-white hover:text-teal-200 hover:no-underline font-bold uppercase tracking-widest p-0">
+                  <Link to={way.href}>
+                    {way.action}
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" aria-hidden="true" />
+                  </Link>
+                </Button>
               </div>
             </motion.div>
           ))}
@@ -133,12 +133,14 @@ export function GetInvolved() {
                 placeholder="Enter your email…"
                 className="w-full lg:w-80 rounded-xl border-0 bg-white/10 px-5 py-4 text-white placeholder:text-teal-200/60 ring-1 ring-inset ring-white/20 focus:ring-2 focus:ring-teal-400 focus:bg-white/15 transition-all backdrop-blur-sm"
               />
-              <button
+              <Button
                 type="submit"
-                className="btn-secondary border-none bg-white text-teal-900 hover:bg-teal-50"
+                variant="secondary"
+                size="lg"
+                className="bg-white text-teal-900 hover:bg-teal-50 font-bold border-none"
               >
                 Subscribe
-              </button>
+              </Button>
             </form>
           </div>
         </motion.div>

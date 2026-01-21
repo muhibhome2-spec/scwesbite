@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+
 import { motion } from 'framer-motion';
 import { SectionHeading, BodyText } from '../components/ui/Typography';
 import { ArrowRight } from 'lucide-react';
@@ -77,9 +79,9 @@ export function SoulCaravanFeature() {
                                     {trip.description}
                                 </p>
 
-                                <button className="w-full py-4 rounded-xl bg-brand-primary-dark text-white font-bold uppercase tracking-widest text-sm hover:bg-olive-600 transition-colors flex items-center justify-center gap-2">
+                                <Button className="w-full py-6 rounded-xl bg-brand-primary-dark text-white font-bold uppercase tracking-widest text-sm hover:bg-olive-600 transition-colors flex items-center justify-center gap-2 h-auto text-wrap">
                                     Apply Now <ArrowRight size={16} />
-                                </button>
+                                </Button>
                             </div>
                         </motion.div>
                     ))}

@@ -5,8 +5,7 @@ export const timelineData = [
         title: "The Seed Was Planted",
         description: "Our founder visited Kenya's Mombasa coast for work and witnessed firsthand the challenges faced by local communities. Inspired to make a difference, he envisioned creating opportunities for people to experience the beauty of Kenya while contributing through volunteer work.",
         photos: [
-            'https://ik.imagekit.io/dzmabcda0/finals/9-DSC00914.jpg',
-            'https://ik.imagekit.io/dzmabcda0/finals/29-DSC00256.jpg'
+            'https://ik.imagekit.io/dzmabcda0/2021?updatedAt=1768993959909'
         ],
         detailedCopy: "Our founder visited Kenya's Mombasa coast for work and witnessed firsthand the challenges faced by local communities. Inspired to make a difference, he envisioned creating opportunities for people to experience the beauty of Kenya while contributing through volunteer work."
     },
@@ -16,7 +15,7 @@ export const timelineData = [
         title: "The Journey Begins",
         description: "Soul Caravan, a company dedicated to traveling with purpose, was born. The first group traveled to Kenya to experience its beauty while giving back, supporting three orphanages and establishing a school library in a local primary school.",
         photos: [
-            'https://ik.imagekit.io/dzmabcda0/finals/31-DSC00213.jpg'
+            'https://ik.imagekit.io/dzmabcda0/2022?updatedAt=1768994086193'
         ],
         detailedCopy: "Soul Caravan, a company dedicated to traveling with purpose, was born. The first group traveled to Kenya to experience its beauty while giving back, supporting three orphanages and establishing a school library in a local primary school."
     },
@@ -26,7 +25,7 @@ export const timelineData = [
         title: "The Commitment Deepens",
         description: "Through the funds raised from our second group trip, we strengthened our support for orphanages and the school library, continuing to stock books and resources. We refurbished an entire orphanage, providing mattresses, fans, school supplies, and many other essentials.",
         photos: [
-            'https://ik.imagekit.io/dzmabcda0/finals/28-DSC00262.jpg'
+            'https://ik.imagekit.io/dzmabcda0/2023'
         ],
         detailedCopy: "Through the funds raised from our second group trip, we strengthened our support for orphanages and the school library, continuing to stock books and resources. We refurbished an entire orphanage, providing mattresses, fans, school supplies, and many other essentials, ensuring the children had a safe and comfortable environment to live and learn."
     },
@@ -36,7 +35,7 @@ export const timelineData = [
         title: "The Impact Expands",
         description: "We continued our support for orphanages and took a major step in education by building a fully outfitted science lab in a soon-to-be-built secondary school within an under-resourced community, providing students with the tools to explore, learn, and grow.",
         photos: [
-            'https://ik.imagekit.io/dzmabcda0/finals/27-DSC00246.jpg'
+            'https://ik.imagekit.io/dzmabcda0/2024%201'
         ],
         detailedCopy: "We continued our support for orphanages and took a major step in education by building a fully outfitted science lab in a soon-to-be-built secondary school within an under-resourced community, providing students with the tools to explore, learn, and grow."
     },
@@ -46,7 +45,7 @@ export const timelineData = [
         title: "The Vision Becomes Clearer",
         description: "Our latest group raised enough funds to renovate a Maasai village school and pledged to build secondary school classrooms. The overwhelming support and incredible enthusiasm inspired us to establish an official charity.",
         photos: [
-            'https://ik.imagekit.io/dzmabcda0/finals/13-DSC00025.jpg'
+            'https://ik.imagekit.io/dzmabcda0/2025?updatedAt=1768994319467'
         ],
         detailedCopy: "Our latest group raised enough funds to renovate a Maasai village school and pledged to build secondary school classrooms. The overwhelming support and incredible enthusiasm from those who experienced our work firsthand inspired us to take the next step: establishing an official charity to expand our impact."
     },
