@@ -20,8 +20,8 @@ export function SmoothScrolling({ children }: SmoothScrollingProps) {
     <ReactLenis
       root
       options={{
-        duration: 0.8, // Reduced for better performance
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        duration: 1.5, // "Heavy" feel
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Keep exponential decay, duration handles the "weight"
         smoothWheel: true,
         syncTouch: false, // Disable on mobile for better native feel
         touchMultiplier: 2,

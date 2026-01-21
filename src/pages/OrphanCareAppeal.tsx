@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { HeartHandshake, Heart, Shield, GraduationCap, ArrowLeft } from 'lucide-react';
 import { NarrativeImage } from '../components/ui/NarrativeImage';
 import { ORPHAN_CARE_IMAGES, IMAGES } from '../data/imageAssets';
+import { SectionHeading, BodyText, DisplayHeading } from '../components/ui/Typography';
 
 const SQUARE_LINK = 'https://square.link/u/1muC8Kjs';
 
@@ -40,13 +41,13 @@ export function OrphanCareAppeal() {
                 Orphan & Widow Care
               </div>
 
-              <h1 className="mb-6 font-serif text-4xl font-semibold leading-tight tracking-tight text-rose-900 sm:text-5xl">
+              <DisplayHeading theme="rose" align="left" className="mb-6 font-semibold">
                 Support Orphans & Widows
-              </h1>
+              </DisplayHeading>
 
-              <p className="mb-8 text-lg leading-relaxed text-gray-600">
+              <BodyText size="lg" className="mb-8 leading-relaxed">
                 Provide comprehensive support including school fees, uniforms, food, and psychosocial support for families who have lost their primary provider. Your monthly support creates stability and hope.
-              </p>
+              </BodyText>
 
               <div className="flex flex-col gap-3 border-l-2 border-rose-200 pl-6 text-sm font-medium text-gray-500 mb-8">
                 <div className="flex items-center gap-3">
@@ -85,15 +86,15 @@ export function OrphanCareAppeal() {
               variant="feature"
             />
             <div>
-              <h2 className="text-3xl font-serif font-semibold text-rose-800 mb-4 text-center">
+              <SectionHeading theme="rose" className="mb-4">
                 Nourishment for Growing Minds
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
+              </SectionHeading>
+              <BodyText size="lg" className="mb-4">
                 Every child deserves nutritious meals that fuel their growth and learning. Our orphan support program ensures no child goes hungry.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              </BodyText>
+              <BodyText size="lg">
                 From daily meals to special treats, we provide the sustenance they need to thrive.
-              </p>
+              </BodyText>
             </div>
           </div>
         </div>
@@ -104,15 +105,15 @@ export function OrphanCareAppeal() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
-              <h2 className="text-3xl font-serif font-semibold text-rose-800 mb-4 text-center">
+              <SectionHeading theme="rose" className="mb-4">
                 Education Opens Doors
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
+              </SectionHeading>
+              <BodyText size="lg" className="mb-4">
                 We cover school fees, uniforms, and supplies so orphaned children can continue their education. Knowledge is their pathway to independence.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              </BodyText>
+              <BodyText size="lg">
                 Many of our supported children go on to become teachers, doctors, and community leaders.
-              </p>
+              </BodyText>
             </div>
             <div className="order-1 lg:order-2">
               <NarrativeImage
@@ -135,15 +136,15 @@ export function OrphanCareAppeal() {
               variant="feature"
             />
             <div>
-              <h2 className="text-3xl font-serif font-semibold text-rose-800 mb-4 text-center">
+              <SectionHeading theme="rose" className="mb-4">
                 A Community of Care
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
+              </SectionHeading>
+              <BodyText size="lg" className="mb-4">
                 Beyond material support, we provide a network of care. Widows receive vocational training while their children receive mentorship and guidance.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              </BodyText>
+              <BodyText size="lg">
                 Together, we build resilient families who can support themselves and give back to their communities.
-              </p>
+              </BodyText>
             </div>
           </div>
         </div>
@@ -153,12 +154,12 @@ export function OrphanCareAppeal() {
       <section className="py-16 lg:py-24 bg-rose-800 text-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <HeartHandshake className="w-12 h-12 mx-auto mb-6 opacity-80" />
-          <h2 className="text-3xl font-serif font-semibold mb-4">
+          <SectionHeading color="inverse" className="mb-4">
             Be a Guardian of Hope
-          </h2>
-          <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+          </SectionHeading>
+          <BodyText color="inverse" size="lg" align="center" className="mb-8 opacity-90 max-w-2xl mx-auto">
             Your support provides complete care for orphaned children — education, nutrition, healthcare, and love.
-          </p>
+          </BodyText>
           <a
             href={SQUARE_LINK}
             target="_blank"

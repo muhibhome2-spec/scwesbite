@@ -1,176 +1,405 @@
-import { motion } from 'framer-motion';
-import { Droplets, Shield, Users, ArrowLeft, Heart } from 'lucide-react';
+import { Droplets, ArrowLeft, Heart, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { NarrativeImage } from '../components/ui/NarrativeImage';
+
 import { WATER_WELL_IMAGES, IMAGES } from '../data/imageAssets';
+import { FadeIn } from '@/components/ui/FadeIn';
+
+// Shadcn Components
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from '@/components/ui/accordion';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from '@/components/ui/carousel';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
 
 const SQUARE_LINK = 'https://square.link/u/d5fSYpG9';
 
+// ============================================================
+// DATA
+// ============================================================
+
+const GALLERY_IMAGES = [
+  { src: IMAGES.WATER.CHILD_TAP_1, alt: 'Child using water tap' },
+  { src: IMAGES.WATER.CHILD_DRINKING, alt: 'Child drinking clean water' },
+  { src: IMAGES.WATER.TANK_VILLAGE_1, alt: 'Water tank in village' },
+  { src: IMAGES.WATER.SIGNAGE_INSTALL_1, alt: 'Well installation with signage' },
+  { src: IMAGES.WATER.TANK_LANDSCAPE, alt: 'Water infrastructure' },
+];
+
+const FAQ_ITEMS = [
+  { question: 'How long does it take to build a well?', answer: 'A typical water well takes 4-8 weeks to complete, depending on the location and ground conditions. We provide regular updates throughout the construction process.' },
+  { question: 'Can I dedicate the well to someone?', answer: 'Yes! You can dedicate the well in memory of a loved one, to celebrate a milestone, or in honor of someone special. A permanent plaque will be installed at the well site.' },
+  { question: 'How do I receive updates on my well?', answer: 'You will receive photos and GPS coordinates once construction is complete. We also send annual impact reports showing how many people your well is serving.' },
+  { question: 'Is my donation tax-deductible?', answer: 'Yes. Soul Caravan Foundation is a registered charity. You will receive a tax receipt via email after your donation is processed.' },
+];
+
+// ============================================================
+// MAIN PAGE
+// ============================================================
+
 export function WaterWellAppeal() {
   return (
-    <div className="min-h-screen bg-white pt-20 lg:pt-24">
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-teal-50 py-16 lg:py-24">
-        <div className="absolute inset-0">
-          <img
-            src={IMAGES.WATER.GIRL_COLLECTING}
-            alt="Child collecting water from well"
-            width={1920}
-            height={1080}
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/30" />
-        </div>
+    <div className="min-h-screen bg-slate-50">
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="flex flex-col"
-            >
-              <Link
-                to="/"
-                className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-teal-700 mb-6 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700 rounded-sm"
-              >
-                <ArrowLeft size={16} aria-hidden="true" />
-                Back to Home
-              </Link>
+      {/* ========================================
+          HERO SECTION - Split Layout
+      ======================================== */}
+      <section className="relative min-h-[85vh] lg:min-h-screen grid lg:grid-cols-2">
+        {/* Left Panel - Content */}
+        <div className="bg-slate-100 flex items-center py-24 lg:py-32 px-8 lg:px-16 order-2 lg:order-1">
+          <div className="max-w-xl">
+            <FadeIn delay={0.1} direction="down">
+              {/* Back Link */}
+              <Button variant="ghost" className="mb-8 pl-0 hover:bg-transparent hover:text-slate-900 text-slate-600 gap-2" asChild>
+                <Link to="/">
+                  <ArrowLeft size={16} />
+                  Back to Home
+                </Link>
+              </Button>
+            </FadeIn>
 
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-100 px-3 py-1 text-xs font-bold uppercase tracking-widest text-teal-700 w-fit">
-                <Droplets size={12} />
-                Water Crisis Appeal
+            <FadeIn delay={0.2} direction="down">
+              {/* Badge */}
+              <div className="mb-6">
+                <Badge variant="secondary" className="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 gap-2 px-4 py-1.5 text-sm font-medium border-none shadow-sm">
+                  <Droplets size={14} />
+                  Sadaqah Jariyah
+                </Badge>
               </div>
+            </FadeIn>
 
-              <h1 className="mb-6 font-serif text-4xl font-semibold leading-tight tracking-tight text-teal-800 sm:text-5xl">
+            <FadeIn delay={0.3}>
+              {/* Headline */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.1] tracking-tight mb-6">
                 Build a Water Well
               </h1>
+            </FadeIn>
 
-              <p className="mb-8 text-lg leading-relaxed text-gray-600">
-                Provide clean, safe drinking water for an entire village. A single well can serve up to 200 people for over 10 years, transforming lives and preventing water-borne diseases.
+            <FadeIn delay={0.4}>
+              {/* Body text */}
+              <p className="text-lg text-slate-700 leading-relaxed mb-8">
+                Provide clean, safe drinking water for an entire village. A single well can serve up to 200 people for over 10 years.
               </p>
+            </FadeIn>
 
-              <div className="flex flex-col gap-3 border-l-2 border-teal-200 pl-6 text-sm font-medium text-gray-500 mb-8">
-                <div className="flex items-center gap-3">
-                  <Shield className="h-5 w-5 text-teal-600" />
-                  <span>Sadaqah Jariyah project</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Users className="h-5 w-5 text-teal-600" />
-                  <span>Serves 200+ people for 10+ years</span>
-                </div>
-              </div>
-
-              <a
-                href={SQUARE_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-teal-600 px-8 py-4 text-base font-bold text-white shadow-lg hover:bg-teal-700 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+            <FadeIn delay={0.5} direction="up">
+              {/* CTA */}
+              <Button
+                asChild
+                size="lg"
+                className="rounded-full bg-emerald-600 hover:bg-emerald-700 text-white h-14 px-8 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <Heart className="h-5 w-5 fill-white" aria-hidden="true" />
+                <a href={SQUARE_LINK} target="_blank" rel="noopener noreferrer" className="gap-3">
+                  <Heart className="h-5 w-5" />
+                  Donate Now
+                </a>
+              </Button>
+            </FadeIn>
+          </div>
+        </div>
+
+        {/* Right Panel - Image */}
+        <div className="relative h-64 lg:h-auto order-1 lg:order-2">
+          <FadeIn className="h-full w-full" duration={1} direction="none">
+            <img
+              src={IMAGES.WATER.GIRL_COLLECTING}
+              alt="Child collecting water from well"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ========================================
+          PROBLEM STATEMENT
+      ======================================== */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="mx-auto max-w-7xl px-8 lg:px-12">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+            {/* Left - Problem */}
+            <div>
+              <FadeIn>
+                <p className="text-sm font-semibold text-emerald-600 uppercase tracking-wider mb-4">What we're solving</p>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight mb-6">
+                  When Communities Can't Access Clean Water
+                </h2>
+              </FadeIn>
+
+              <FadeIn delay={0.2}>
+                <div className="space-y-5 text-lg text-slate-700 leading-relaxed">
+                  <p>
+                    Millions of families in rural Kenya walk miles each day to collect water from contaminated sources. Children miss school. Women spend hours fetching water instead of pursuing opportunities.
+                  </p>
+                  <p>
+                    Water-borne diseases claim lives that could be saved with simple access to clean water. Your support provides life-saving infrastructure for communities in desperate need.
+                  </p>
+                </div>
+              </FadeIn>
+
+              <FadeIn delay={0.3}>
+                <h3 className="text-xl font-bold text-slate-900 mt-10 mb-5">
+                  How Our Water Wells Make a Difference
+                </h3>
+              </FadeIn>
+
+              <ul className="space-y-4 text-slate-700">
+                <FadeIn delay={0.4} direction="right">
+                  <li className="flex items-start gap-3">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 mt-2.5 flex-shrink-0" />
+                    Wells are built with durable materials for 10+ year lifespan
+                  </li>
+                </FadeIn>
+                <FadeIn delay={0.5} direction="right">
+                  <li className="flex items-start gap-3">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 mt-2.5 flex-shrink-0" />
+                    Each well serves 200+ community members daily
+                  </li>
+                </FadeIn>
+                <FadeIn delay={0.6} direction="right">
+                  <li className="flex items-start gap-3">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 mt-2.5 flex-shrink-0" />
+                    Local teams maintain the infrastructure for sustainability
+                  </li>
+                </FadeIn>
+              </ul>
+            </div>
+
+            {/* Right - Video/Image */}
+            <div className="relative">
+              <FadeIn direction="left" delay={0.2}>
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                  <img
+                    src={WATER_WELL_IMAGES[1]}
+                    alt="Child using water tap"
+                    className="w-full h-full object-cover"
+                  />
+                  <button className="absolute inset-0 flex items-center justify-center bg-slate-900/20 hover:bg-slate-900/30 transition-colors group">
+                    <div className="min-w-11 min-h-11 w-20 h-20 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <Play className="w-8 h-8 text-slate-800 ml-1" />
+                    </div>
+                  </button>
+                </div>
+                <p className="mt-5 text-center text-slate-600">
+                  Your Support Helps Communities Access Clean Water
+                </p>
+              </FadeIn>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================
+          IMPACT GALLERY (Carousel)
+      ======================================== */}
+      <section className="py-16 lg:py-24 bg-slate-100">
+        <div className="mx-auto max-w-7xl px-8 lg:px-12 mb-10">
+          <FadeIn>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+              The Impact You've Delivered
+            </h2>
+            <p className="mt-4 text-lg text-slate-600 max-w-2xl">
+              Your generosity builds water infrastructure for communities across rural Kenya.
+            </p>
+          </FadeIn>
+        </div>
+
+        <div className="px-12 max-w-[1400px] mx-auto">
+          <FadeIn delay={0.2} direction="up" fullWidth>
+            <Carousel opts={{ align: "start", loop: true }} className="w-full">
+              <CarouselContent className="-ml-4">
+                {GALLERY_IMAGES.map((img, i) => (
+                  <CarouselItem key={i} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                    <div className="p-1">
+                      <Card className="rounded-2xl overflow-hidden shadow-xl border-none">
+                        <div className="aspect-[4/3]">
+                          <img
+                            src={img.src}
+                            alt={img.alt}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-4 w-12 h-12 border-none shadow-lg" />
+              <CarouselNext className="right-4 w-12 h-12 border-none shadow-lg" />
+            </Carousel>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ========================================
+          BENEFICIARY STORY
+      ======================================== */}
+      {/* ========================================
+          BENEFICIARY STORY (Cinematic Card)
+      ======================================== */}
+      <section className="relative py-32 overflow-hidden">
+        {/* Immersive Background */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          style={{ backgroundImage: `url(${IMAGES.WATER.TANK_LANDSCAPE})` }}
+        />
+        <div className="absolute inset-0 bg-slate-900/90" />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-8 lg:px-12">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+
+            {/* Left - Story Text */}
+            <div className="order-1">
+              <FadeIn>
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="h-px w-12 bg-emerald-500/50"></span>
+                  <span className="text-emerald-400 font-medium tracking-widest uppercase text-sm">Real Impact</span>
+                </div>
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-8">
+                  Amina's Story
+                </h2>
+              </FadeIn>
+
+              <FadeIn delay={0.2}>
+                <div className="space-y-6 text-lg text-zinc-200/90 leading-relaxed">
+                  <p>
+                    Amina Mwende, a mother of six from Kilifi County, used to walk three hours each day to collect water from a distant river. Her children often fell sick from waterborne diseases, and she had no time to earn income for her family.
+                  </p>
+                  <p>
+                    When a water well was built in her village, everything changed. Her children are now healthy and attending school. Amina has started a small vegetable garden using the clean water, generating income for her family.
+                  </p>
+
+                  <blockquote className="mt-8 border-l-4 border-emerald-500 pl-6 py-2">
+                    <p className="text-emerald-400 font-serif italic text-2xl leading-relaxed">
+                      "This well didn't just give us water — it gave us our lives back."
+                    </p>
+                  </blockquote>
+                </div>
+              </FadeIn>
+            </div>
+
+            {/* Right - Floating Card Image */}
+            <div className="order-2 perspective-1000">
+              <FadeIn direction="left" delay={0.3} duration={1.2}>
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-[2.6rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                  <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl rotate-2 group-hover:rotate-0 transition-all duration-700 ease-out border-4 border-white/10">
+                    <img
+                      src={IMAGES.WATER.CHILD_TAP_2}
+                      alt="Amina and her family"
+                      className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
+                    />
+
+                    {/* Subtle inner gloss */}
+                    <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[2.5rem] pointer-events-none" />
+                  </div>
+                </div>
+              </FadeIn>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================
+          VOLUNTEER QUOTE
+      ======================================== */}
+      <section className="py-20 lg:py-28 bg-slate-100">
+        <div className="mx-auto max-w-7xl px-8 lg:px-12">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <FadeIn direction="right" delay={0.2}>
+              <div className="aspect-[4/3] lg:aspect-square rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src={IMAGES.WATER.SIGNAGE_INSTALL_2}
+                  alt="Field team installing well"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </FadeIn>
+            <div>
+              <FadeIn>
+                <p className="text-sm font-semibold text-emerald-600 uppercase tracking-wider mb-5">
+                  From the Field
+                </p>
+                <blockquote className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-snug">
+                  <span className="text-emerald-600">"As a volunteer</span>— I see the relief a family feels when clean water flows for the first time. It's not just infrastructure; it's hope, health, and a future they never thought possible."
+                </blockquote>
+                <div className="mt-8">
+                  <p className="font-semibold text-slate-900">Hassan Ochieng</p>
+                  <p className="text-slate-600">Field Operations Lead, Kilifi Region</p>
+                </div>
+              </FadeIn>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================
+          FAQ SECTION (Accordion)
+      ======================================== */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="mx-auto max-w-3xl px-8 lg:px-12">
+          <FadeIn>
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 text-center mb-12">
+              Frequently Asked Questions
+            </h2>
+          </FadeIn>
+
+          <FadeIn delay={0.2} direction="up">
+            <Card className="bg-slate-50 border-none shadow-xl p-8 lg:p-10">
+              <Accordion type="single" collapsible className="w-full">
+                {FAQ_ITEMS.map((item, i) => (
+                  <AccordionItem key={i} value={`item-${i}`} className="border-b-slate-200">
+                    <AccordionTrigger className="text-base font-medium text-slate-800 hover:text-emerald-700 hover:no-underline py-5">
+                      {item.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-slate-600 leading-relaxed text-base">
+                      {item.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </Card>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ========================================
+          FINAL CTA
+      ======================================== */}
+      <section className="py-24 lg:py-32 bg-slate-100">
+        <div className="mx-auto max-w-4xl px-8 lg:px-12 text-center">
+          <FadeIn>
+            <Droplets className="w-16 h-16 mx-auto mb-8 text-emerald-600" />
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight mb-6">
+              Transform a Community Today
+            </h2>
+
+            <p className="text-xl text-slate-700 max-w-2xl mx-auto mb-10 leading-relaxed">
+              Your contribution helps us build water wells that serve over 200 people for more than a decade. Give the gift of clean water.
+            </p>
+
+            <Button
+              asChild
+              size="lg"
+              className="rounded-full bg-emerald-600 hover:bg-emerald-700 text-white h-14 px-10 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+            >
+              <a href={SQUARE_LINK} target="_blank" rel="noopener noreferrer" className="gap-3">
+                <Heart className="h-5 w-5" />
                 Donate Now
               </a>
-            </motion.div>
-
-            <div className="hidden lg:block" />
-          </div>
-        </div>
-      </section>
-
-      {/* NARRATIVE IMAGE SECTION 1 */}
-      <section className="py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <NarrativeImage
-              src={WATER_WELL_IMAGES[1]}
-              alt="Child using water tap"
-              variant="feature"
-            />
-            <div>
-              <h2 className="text-3xl font-serif font-semibold text-teal-800 mb-4 text-center">
-                Clean Water Changes Everything
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
-                Access to clean water transforms communities. Children no longer walk miles to collect contaminated water. Instead, they attend school. Women can pursue opportunities. Entire villages thrive.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                Your donation provides sustainable infrastructure that serves generations.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NARRATIVE IMAGE SECTION 2 */}
-      <section className="py-16 lg:py-24 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1">
-              <h2 className="text-3xl font-serif font-semibold text-teal-800 mb-4 text-center">
-                Built to Last
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
-                Each water well is constructed with durable materials and includes a storage tank to ensure consistent water supply. We partner with local communities for maintenance.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                A plaque bearing your name or the name of your loved one marks your contribution to this life-saving project.
-              </p>
-            </div>
-            <div className="order-1 lg:order-2">
-              <NarrativeImage
-                src={WATER_WELL_IMAGES[2]}
-                alt="Water well structure"
-                variant="feature"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NARRATIVE IMAGE SECTION 3 */}
-      <section className="py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <NarrativeImage
-              src={WATER_WELL_IMAGES[3]}
-              alt="Water well installation"
-              variant="feature"
-            />
-            <div>
-              <h2 className="text-3xl font-serif font-semibold text-teal-800 mb-4 text-center">
-                A Legacy of Giving
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
-                When you build a water well, you create a source of sadaqah jariyah — continuous charity that keeps giving rewards as long as the well provides water.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                Perfect for honoring a loved one's memory or celebrating a milestone.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section className="py-16 lg:py-24 bg-teal-800 text-white">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <Droplets className="w-12 h-12 mx-auto mb-6 opacity-80" />
-          <h2 className="text-3xl font-serif font-semibold mb-4">
-            Transform a Community Today
-          </h2>
-          <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-            Your contribution helps us build water wells that serve over 200 people for more than a decade.
-          </p>
-          <a
-            href={SQUARE_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-white text-teal-800 px-8 py-4 text-base font-bold shadow-lg transition-colors hover:bg-teal-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            <Heart className="h-5 w-5" />
-            Donate Now
-          </a>
+            </Button>
+          </FadeIn>
         </div>
       </section>
     </div>

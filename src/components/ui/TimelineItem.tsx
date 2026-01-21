@@ -30,7 +30,7 @@ export function TimelineItem({ item, index, onClick }: TimelineItemProps) {
         >
 
             {/* 5. THE NODE: Custom markers based on status */}
-            <div className="absolute left-0 top-1.5 -translate-x-1/2 z-20 flex flex-col items-center">
+            <div className="absolute left-0 top-1 -translate-x-1/2 z-raised flex flex-col items-center">
                 <motion.div
                     animate={{
                         scale: isInView ? 1.2 : 1,
@@ -43,7 +43,7 @@ export function TimelineItem({ item, index, onClick }: TimelineItemProps) {
           `}
                 >
                     {item.status === 'completed' && isInView && (
-                        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-1.5 h-1.5 bg-brand-primary rounded-full" />
+                        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-2 h-2 bg-brand-primary rounded-full" />
                     )}
                     {isCurrent && (
                         <span className="absolute inline-flex h-full w-full rounded-full bg-olive-500 opacity-20 animate-ping" />

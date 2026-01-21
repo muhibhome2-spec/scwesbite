@@ -115,7 +115,7 @@ export function Programs() {
               {/* Content */}
               <div className="p-6 flex flex-col flex-grow text-center">
                 <Card.Header>
-                  <Heading level={3} className="text-gray-900 !text-xl !font-serif">
+                  <Heading level={3} className="text-primary !text-xl !font-serif">
                     {program.title}
                   </Heading>
                 </Card.Header>
@@ -140,7 +140,7 @@ export function Programs() {
                         Learn More
                       </Button>
                     ) : (
-                      <span className="w-full inline-flex items-center justify-center gap-1.5 px-5 py-3 min-h-[44px] rounded-full border-2 border-gray-200 text-gray-400 text-sm font-semibold cursor-not-allowed">
+                      <span className="w-full inline-flex items-center justify-center gap-1.5 px-5 py-3 min-h-[44px] rounded-full border-2 border-gray-200 text-muted text-sm font-semibold cursor-not-allowed">
                         Coming Soon
                       </span>
                     )}

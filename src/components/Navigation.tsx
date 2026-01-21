@@ -30,7 +30,8 @@ export function Navigation() {
     <>
       {/* MAIN HEADER - DARK TEAL AS REQUESTED */}
       <header
-        className={`fixed left-0 right-0 w-full z-[100] bg-[#264144] transition-all duration-300 ${isScrolled ? 'top-0 shadow-lg' : 'top-0'}`}
+        className={`fixed left-0 right-0 w-full z-header transition-all duration-300 ${isScrolled ? 'top-0 shadow-soft' : 'top-0'}`}
+        style={{ backgroundColor: '#264144' }}
       >
         <div className="max-w-7xl mx-auto px-5 md:px-8">
           <div className="flex items-center justify-between h-20 lg:h-24">
@@ -60,7 +61,7 @@ export function Navigation() {
               {/* Donate CTA */}
               <Link
                 to="/appeals"
-                className="flex items-center gap-2 bg-[#ff6f46] hover:bg-[#e55a35] text-white font-bold text-sm px-5 py-3 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ff6f46] focus-visible:ring-offset-[#264144]"
+                className="flex items-center gap-2 bg-brand-accent hover:bg-brand-accent/90 text-brand-primary-darker font-bold text-sm px-5 py-3 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-accent focus-visible:ring-offset-brand-primary-darker"
               >
                 Donate
                 <ArrowUpRight className="w-4 h-4" />
@@ -76,7 +77,7 @@ export function Navigation() {
             <div className="flex items-center gap-3 lg:hidden">
               <Link
                 to="/appeals"
-                className="bg-[#ff6f46] text-white font-bold text-sm px-4 py-2 rounded-full"
+                className="bg-brand-accent text-brand-primary-darker font-bold text-sm px-4 py-2 rounded-full"
               >
                 Donate
               </Link>

@@ -103,12 +103,12 @@ export function Impact() {
           <div className="lg:col-span-7 relative pt-8 lg:pt-4 pb-20">
 
             {/* 3. THE THREAD: Gray background line */}
-            <div className="absolute left-[8px] lg:left-[8px] top-0 bottom-0 w-px bg-gray-100" />
+            <div className="absolute left-2 lg:left-2 top-0 bottom-0 w-px bg-gray-100" />
 
             {/* 4. THE BEAM: Gradient progress line */}
             <motion.div
               style={{ scaleY, transformOrigin: "top" }}
-              className="absolute left-[8px] lg:left-[8px] top-0 bottom-0 w-px bg-gradient-to-b from-teal-500 via-teal-300 to-teal-500 z-10"
+              className="absolute left-2 lg:left-2 top-0 bottom-0 w-px bg-gradient-to-b from-teal-500 via-teal-300 to-teal-500 z-10"
             />
 
             <div className="space-y-12">

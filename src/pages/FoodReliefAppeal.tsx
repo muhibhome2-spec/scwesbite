@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Utensils, Shield, Clock, ArrowLeft, Heart } from 'lucide-react';
 import { NarrativeImage } from '../components/ui/NarrativeImage';
 import { FOOD_RELIEF_IMAGES, IMAGES } from '../data/imageAssets';
+import { DisplayHeading, SectionHeading, BodyText } from '../components/ui/Typography';
 
 const SQUARE_LINK = 'https://square.link/u/dpkEeY0Q';
 
@@ -40,13 +41,13 @@ export function FoodReliefAppeal() {
                 Emergency Relief
               </div>
 
-              <h1 className="mb-6 font-serif text-4xl font-semibold leading-tight tracking-tight text-orange-900 sm:text-5xl">
+              <DisplayHeading theme="amber" align="left" className="mb-6 font-semibold">
                 Emergency Food Relief
-              </h1>
+              </DisplayHeading>
 
-              <p className="mb-8 text-lg leading-relaxed text-gray-600">
+              <BodyText size="lg" className="mb-8 leading-relaxed">
                 Distribute hot, nutritious meals and monthly food parcels to families facing starvation due to poverty or conflict. When hunger strikes, immediate action saves lives.
-              </p>
+              </BodyText>
 
               <div className="flex flex-col gap-3 border-l-2 border-orange-200 pl-6 text-sm font-medium text-gray-500 mb-8">
                 <div className="flex items-center gap-3">
@@ -85,15 +86,17 @@ export function FoodReliefAppeal() {
               variant="feature"
             />
             <div>
-              <h2 className="text-3xl font-serif font-semibold text-orange-800 mb-4 text-center">
-                Hot Meals That Nourish
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
-                Our hot meal programs provide freshly cooked, nutritious food to those who need it most. From community halls to school feeding programs, we reach the hungry where they are.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                Every meal includes rice, protein, and vegetables — a complete, balanced diet.
-              </p>
+              <div>
+                <SectionHeading theme="amber" className="mb-4">
+                  Hot Meals That Nourish
+                </SectionHeading>
+                <BodyText size="lg" className="mb-4">
+                  Our hot meal programs provide freshly cooked, nutritious food to those who need it most. From community halls to school feeding programs, we reach the hungry where they are.
+                </BodyText>
+                <BodyText size="lg">
+                  Every meal includes rice, protein, and vegetables — a complete, balanced diet.
+                </BodyText>
+              </div>
             </div>
           </div>
         </div>
@@ -104,15 +107,15 @@ export function FoodReliefAppeal() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
-              <h2 className="text-3xl font-serif font-semibold text-orange-800 mb-4 text-center">
+              <SectionHeading theme="amber" className="mb-4">
                 Food Parcels for Families
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
+              </SectionHeading>
+              <BodyText size="lg" className="mb-4">
                 Beyond daily meals, we distribute monthly food parcels containing rice, flour, cooking oil, lentils, and other essentials. Each parcel feeds a family for weeks.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              </BodyText>
+              <BodyText size="lg">
                 These provisions ensure that families have the stability of knowing where their next meal will come from.
-              </p>
+              </BodyText>
             </div>
             <div className="order-1 lg:order-2">
               <NarrativeImage
@@ -135,15 +138,17 @@ export function FoodReliefAppeal() {
               variant="feature"
             />
             <div>
-              <h2 className="text-3xl font-serif font-semibold text-orange-800 mb-4 text-center">
-                Community Distribution
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
-                We set up distribution points in villages and community centers, ensuring that aid reaches even the most remote areas. Local volunteers help identify families in need.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                Your donation doesn't just provide food — it builds community resilience.
-              </p>
+              <div>
+                <SectionHeading theme="amber" className="mb-4">
+                  Community Distribution
+                </SectionHeading>
+                <BodyText size="lg" className="mb-4">
+                  We set up distribution points in villages and community centers, ensuring that aid reaches even the most remote areas. Local volunteers help identify families in need.
+                </BodyText>
+                <BodyText size="lg">
+                  Your donation doesn't just provide food — it builds community resilience.
+                </BodyText>
+              </div>
             </div>
           </div>
         </div>
@@ -153,12 +158,12 @@ export function FoodReliefAppeal() {
       <section className="py-16 lg:py-24 bg-orange-800 text-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <Utensils className="w-12 h-12 mx-auto mb-6 opacity-80" />
-          <h2 className="text-3xl font-serif font-semibold mb-4">
+          <SectionHeading color="inverse" className="mb-4">
             No One Should Go Hungry
-          </h2>
-          <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+          </SectionHeading>
+          <BodyText color="inverse" size="lg" align="center" className="mb-8 opacity-90 max-w-2xl mx-auto">
             Your generosity feeds hope and provides essential nutrition to families in need.
-          </p>
+          </BodyText>
           <a
             href={SQUARE_LINK}
             target="_blank"

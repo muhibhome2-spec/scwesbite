@@ -71,7 +71,7 @@ export function GetInvolved() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, delay: index * 0.1, ease: EASE }}
-              className="group relative bg-[#264144] rounded-xl p-8 hover:bg-[#1f3638] transition-colors duration-300"
+              className="group relative bg-brand-primary-dark rounded-xl p-8 hover:bg-brand-primary-hover transition-colors duration-300"
             >
               <div className={`
                 w-14 h-14 mx-auto mb-8 rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110
@@ -104,7 +104,7 @@ export function GetInvolved() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
-          className="relative overflow-hidden rounded-3xl bg-[#264144] px-6 py-12 shadow-2xl lg:px-16 lg:py-16"
+          className="relative overflow-hidden rounded-3xl bg-brand-primary-dark px-6 py-12 shadow-2xl lg:px-16 lg:py-16"
         >
           <div className="absolute top-0 right-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-teal-500/20 blur-3xl" />
           <div className="absolute bottom-0 left-0 -ml-16 -mb-16 h-64 w-64 rounded-full bg-teal-800/20 blur-3xl" />
