@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { Sparkles, Calendar } from 'lucide-react';
 import { timelineData } from '@/data/timelineData';
 import { FadeIn } from '@/components/ui/FadeIn';
@@ -11,11 +11,8 @@ export function TimelineVertical() {
         offset: ["start center", "end center"]
     });
 
-    const scaleY = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001
-    });
+    // Optimized: Direct scroll mapping without spring physics avoids "jank" / fighting native scroll
+    const scaleY = scrollYProgress;
 
     return (
         <div ref={containerRef} className="relative space-y-20 lg:space-y-0">
@@ -26,7 +23,7 @@ export function TimelineVertical() {
             {/* PROGRESS BEAM */}
             <motion.div
                 style={{ scaleY, transformOrigin: "top" }}
-                className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-teal-500 via-teal-300 to-teal-500 -translate-x-1/2 z-10 origin-top"
+                className="absolute left-6 sm:left-8 lg:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-teal-500 via-teal-300 to-teal-500 -translate-x-1/2 z-10 origin-top"
             />
 
             {timelineData.map((item, index) => {

@@ -37,15 +37,18 @@ export function Navigation() {
           <div className="flex items-center justify-between h-20 lg:h-24">
 
             {/* LOGO - flex-shrink-0 prevents compression, min-w ensures space */}
+            {/* LOGO - Optimized sizing for "Soul" impact */}
             <Link
               to="/"
-              className="flex-shrink-0 min-w-[80px] lg:min-w-0 flex items-center z-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded-md overflow-visible"
+              className="flex-shrink-0 z-50 focus:outline-none rounded-md"
             >
-              <img
-                src="https://ik.imagekit.io/dzmabcda0/Design_6.svg"
-                alt="Soul Caravan Foundation"
-                className="h-12 lg:h-14 w-auto scale-[1.8] lg:scale-[2.8] origin-left lg:origin-center"
-              />
+              <div className="relative w-40 h-20 -my-4 lg:w-48 lg:h-24 lg:-my-6 flex items-center justify-start overflow-hidden">
+                <img
+                  src="https://ik.imagekit.io/dzmabcda0/Design_6.svg"
+                  alt="Soul Caravan Foundation"
+                  className="w-full h-full object-contain scale-[2.5] origin-center transform-gpu"
+                />
+              </div>
             </Link>
 
             {/* DESKTOP NAV */}
@@ -58,13 +61,16 @@ export function Navigation() {
             {/* DESKTOP ACTIONS */}
             <div className="hidden lg:flex items-center gap-4">
               {/* Donate CTA */}
-              <Link
-                to="/#programs"
-                className="flex items-center gap-2 bg-brand-accent hover:bg-brand-accent/90 text-brand-primary-darker font-bold text-sm px-5 py-3 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-accent focus-visible:ring-offset-brand-primary-darker"
+              {/* Donate CTA */}
+              <a
+                href="https://square.link/u/cI8AoKop"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[#98a55f] hover:brightness-110 text-white font-bold text-sm px-6 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#98a55f] focus:ring-offset-brand-primary-darker"
               >
                 Donate
                 <ArrowUpRight className="w-4 h-4" />
-              </Link>
+              </a>
 
               {/* User Icon */}
               <Button size="icon" variant="ghost" className="rounded-full bg-white/10 hover:bg-white/20 text-white hover:text-white transition-colors">
@@ -74,12 +80,14 @@ export function Navigation() {
 
             {/* MOBILE ACTIONS */}
             <div className="flex items-center gap-3 lg:hidden">
-              <Link
-                to="/#programs"
-                className="bg-brand-accent text-brand-primary-darker font-bold text-sm px-4 flex items-center min-h-[44px] rounded-full active:scale-95 transition-transform"
+              <a
+                href="https://square.link/u/cI8AoKop"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#98a55f] text-white font-bold text-sm px-4 flex items-center min-h-[44px] rounded-full active:scale-95 transition-transform"
               >
                 Donate
-              </Link>
+              </a>
               <HamburgerToggle
                 isOpen={isMobileMenuOpen}
                 toggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

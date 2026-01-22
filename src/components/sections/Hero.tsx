@@ -21,7 +21,17 @@ export function Hero() {
           <source src={VIDEO_URL} type="video/mp4" />
         </video>
         {/* Subtle gradient for visual depth only */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
+
+        {/* HERO CONTENT OVERLAY */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 drop-shadow-lg opacity-0 animate-[fadeIn_1s_ease-out_forwards]">
+            Soul Caravan <br className="hidden md:block" /> Foundation
+          </h1>
+          <p className="text-lg md:text-2xl text-gray-200 max-w-2xl drop-shadow-md opacity-0 animate-[fadeIn_1s_ease-out_0.5s_forwards]">
+            Empowering communities through education, water, and care.
+          </p>
+        </div>
       </div>
 
     </section>

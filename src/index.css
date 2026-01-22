@@ -69,7 +69,10 @@
   body {
     font-family: 'Lato', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     font-feature-settings: 'cv11', 'ss01';
-    line-height: 1.6;
+    font-size: 1rem;
+    /* 16px Base */
+    line-height: 1.5;
+    /* Tightened from 1.6 to mitigate height shift */
     color: var(--text-primary);
     background-color: var(--bg-primary);
     overscroll-behavior: none;
@@ -77,6 +80,15 @@
     /* Prevent horizontal scroll on mobile */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      font-size: 1.125rem;
+      /* 18px on Desktop */
+      line-height: 1.6;
+      /* Loosen back up for wider lines */
+    }
   }
 
   h1,

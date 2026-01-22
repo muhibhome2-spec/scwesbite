@@ -99,10 +99,11 @@ export function Programs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group flex flex-col bg-white border border-gray-100 p-0"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group flex flex-col bg-white border border-gray-100 rounded-xl overflow-hidden shadow-soft hover:shadow-elevated transition-shadow duration-300"
             >
               {/* Image - Strict 4:3, Sharp */}
-              <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100 relative">
+              <div className="aspect-[4/3] w-full bg-gray-100 relative overflow-hidden">
                 <img
                   src={program.image}
                   alt={program.title}
@@ -124,18 +125,18 @@ export function Programs() {
                 {/* Action Stack */}
                 <div className="space-y-3 mt-auto w-full">
                   {program.href ? (
-                    <Button asChild variant="outline" className="w-full rounded-none border-gray-200 hover:border-teal-600 hover:text-teal-700 h-11 uppercase tracking-widest text-xs font-bold">
+                    <Button asChild variant="outline" className="w-full rounded-xl border-gray-200 hover:border-teal-600 hover:text-teal-700 h-11 uppercase tracking-widest text-xs font-bold">
                       <a href={program.href}>
                         Learn More <ArrowUpRight className="ml-2 h-3 w-3" />
                       </a>
                     </Button>
                   ) : (
-                    <div className="w-full h-11 flex items-center justify-center border border-gray-100 text-gray-400 text-xs font-bold uppercase tracking-widest bg-gray-50 cursor-not-allowed">
+                    <div className="w-full h-11 flex items-center justify-center border border-gray-100 text-gray-400 text-xs font-bold uppercase tracking-widest bg-gray-50 cursor-not-allowed rounded-xl">
                       Coming Soon
                     </div>
                   )}
 
-                  <Button asChild className="w-full rounded-none bg-teal-800 hover:bg-teal-700 text-white h-11 uppercase tracking-widest text-xs font-bold shadow-none">
+                  <Button asChild className="w-full rounded-xl bg-teal-800 hover:bg-teal-700 text-white h-11 uppercase tracking-widest text-xs font-bold shadow-none">
                     <a href={program.donateLink} target="_blank" rel="noopener noreferrer">
                       Donate Now
                     </a>
