@@ -25,6 +25,7 @@ const QurbaniAppeal = lazy(() => import('./pages/QurbaniAppeal').then(m => ({ de
 const Purpose = lazy(() => import('./pages/Purpose').then(m => ({ default: m.Purpose })));
 const Leadership = lazy(() => import('./pages/Leadership').then(m => ({ default: m.Leadership })));
 const Fundraise = lazy(() => import('./pages/Fundraise').then(m => ({ default: m.Fundraise })));
+const Volunteer = lazy(() => import('./pages/Volunteer').then(m => ({ default: m.Volunteer })));
 
 function NoiseOverlay() {
   return (
@@ -77,6 +78,7 @@ function App() {
                   <Route path="/purpose" element={<Purpose />} />
                   <Route path="/leadership" element={<Leadership />} />
                   <Route path="/fundraise" element={<Fundraise />} />
+                  <Route path="/volunteer" element={<Volunteer />} />
                   <Route path="/soul-caravan" element={<SoulCaravanFeature />} />
                 </Routes>
               </Suspense>
