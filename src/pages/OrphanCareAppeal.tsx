@@ -41,7 +41,7 @@ export function OrphanCareAppeal() {
 
       {/* Problem */}
       <AppealProblem
-        label="Nourishment for Growing Minds"
+        label="Developing Bonds and Connection for Well-being"
         title="Every Child Deserves to Thrive"
         intro={
           <>
